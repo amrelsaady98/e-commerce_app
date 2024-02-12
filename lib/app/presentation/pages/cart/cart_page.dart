@@ -2,111 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/app/domain/entities/cart_item.dart';
+import 'package:shop_app/app/presentation/controllers/cart/cart_controller.dart';
+import 'package:shop_app/app/presentation/pages/cart/cart_page_widgets.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
+import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
-class CartPage extends GetView {
+class CartPage extends GetView<CartController> {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 32,
-          ),
-        ),
-        title: Text(
-          "My Cart",
-          style: GoogleFonts.merriweather(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        toolbarHeight: 88,
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: "My Cart",
+        onLeadingPressed: () => Get.back(),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Container(
-              width: double.infinity,
-              alignment: Alignment.topCenter,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: ListView.separated(
-                itemCount: 12,
-                separatorBuilder: (context, index) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    child: Divider(
-                      thickness: 0.5,
-                      color: Get.theme.colorScheme.secondary,
-                    ),
-                  );
-                },
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            'assets/images/product_image_1.png',
-                            width: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Product Name',
-                                    style: GoogleFonts.nunitoSans(),
-                                  ),
-                                  const Icon(Icons.close_rounded),
-                                ],
-                              ),
-                              Text(
-                                "\$ 50.00",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Expanded(child: Container()),
-                              ProductCounter(
-                                count: 1,
-                                increse: () {},
-                                decrese: () {},
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
+            child: Obx(
+              () => Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: ListView.separated(
+                  itemCount: controller.cartList.length,
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 8),
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Get.theme.colorScheme.secondary,
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    CartItem cartItem = controller.cartList[index];
+                    return CartItemTile(
+                      cartItem: cartItem,
+                      onRemovePressed: () =>
+                          controller.deleteCartItem(cartItem),
+                      onIcreasePressed: () =>
+                          controller.increaseCartItemAmount(cartItem),
+                      onDecreasePressed: () =>
+                          controller.decreaseCartItemAmount(cartItem),
+                    );
+                  },
+                ),
               ),
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
             child: Column(
               children: [
                 Container(

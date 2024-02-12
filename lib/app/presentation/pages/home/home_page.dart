@@ -135,6 +135,7 @@ class HomePage extends GetView<HomeController> {
                       Get.toNamed(Routes.PRODUCT_DETAILS_PAGE,
                           parameters: {"index": "$index"});
                     },
+                    onAddToCartPressed: controller.addToCartPressed,
                   );
                 },
               ),

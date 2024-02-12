@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
+import 'package:shop_app/app/application/auth_manager/cart_manager.dart';
+import 'package:shop_app/app/domain/entities/cart_item.dart';
 import 'package:shop_app/app/domain/entities/category.dart';
 import 'package:shop_app/app/domain/entities/product.dart';
 import 'package:shop_app/app/domain/use_cases/category_use_case.dart';
@@ -60,5 +62,11 @@ class HomeController extends GetxController {
   void categoryItempresed(int index) {
     selectedCategoryIndex.value = index;
     selectedCategoryIndex.refresh();
+  }
+
+  void addToCartPressed({required int index}) async {
+    Product selectedProduct = products[index];
+    CartItem cartItem = CartItem(item: selectedProduct, count: 1);
+    Get.find<CartManager>().addCartItem(cartItem);
   }
 }

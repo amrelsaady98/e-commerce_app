@@ -11,12 +11,14 @@ class ProductItem extends StatelessWidget {
   final Product item;
   final int index;
   final void Function(int index) onItemPressed;
+  final void Function({required int index}) onAddToCartPressed;
 
   const ProductItem({
     super.key,
     required this.item,
     required this.index,
     required this.onItemPressed,
+    required this.onAddToCartPressed,
   });
   @override
   Widget build(BuildContext context) {
@@ -45,16 +47,19 @@ class ProductItem extends StatelessWidget {
                       onTap: () {
                         // TODO: add to cart
                       },
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.secondary
-                                .withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: SvgPicture.asset(
-                            'assets/vectors/icon_add_to_cart.svg'),
+                      child: GestureDetector(
+                        onTap: () => onAddToCartPressed(index: index),
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              color: Get.theme.colorScheme.secondary
+                                  .withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: SvgPicture.asset(
+                              'assets/vectors/icon_add_to_cart.svg'),
+                        ),
                       ),
                     ),
                   )

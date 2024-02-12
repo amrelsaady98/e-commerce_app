@@ -8,6 +8,7 @@ import 'package:shop_app/app/presentation/controllers/authentication/login_bindi
 import 'package:shop_app/app/presentation/controllers/authentication/login_controller.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
 import 'package:shop_app/app/presentation/pages/authintication/login_page.dart';
+import 'package:shop_app/app/presentation/pages/home/favourite_page.dart';
 import 'package:shop_app/app/presentation/pages/home/home_page.dart';
 import 'package:shop_app/app/presentation/pages/home/main_page.dart';
 import 'package:shop_app/app/presentation/pages/intro_page/intro_page.dart';
@@ -42,7 +43,7 @@ class MainController extends GetxController {
 
   final List<String> pages = [
     Routes.HOME_PAGE,
-    Routes.INTRO_PAGE,
+    Routes.FAVOURITES_PAGE,
     "Notification",
     "Profile"
   ];
@@ -76,6 +77,11 @@ class MainController extends GetxController {
       return GetPageRoute(
         settings: settings,
         page: () => IntroPage(),
+      );
+    if (settings.name == Routes.FAVOURITES_PAGE)
+      return GetPageRoute(
+        settings: settings,
+        page: () => FavouritesPage(),
       );
 
     return null;

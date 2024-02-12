@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
+import 'package:shop_app/app/presentation/controllers/cart/cart_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/main/main_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/splash/splash_bindings.dart';
@@ -18,6 +19,7 @@ class Routes {
   static String INTRO_PAGE = '/intro';
   static String MAIN_PAGE = '/main';
   static String HOME_PAGE = '/home';
+  static String FAVOURITES_PAGE = '/favourites';
   static String PRODUCT_DETAILS_PAGE = '/product_details';
   static String LOGIN_PAGE = '/login';
   static String SIGNUP_PAGE = '/register';
@@ -44,7 +46,7 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.CART_PAGE,
     page: () => const CartPage(),
-    
+    binding: CartBindings(),
   ),
   GetPage(
     name: Routes.PRODUCT_DETAILS_PAGE,

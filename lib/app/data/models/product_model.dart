@@ -50,7 +50,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "1",
+        'id': "2",
         'name': "Coffee Chair",
         'thumbnail-image': "assets/images/product_image_4.png",
         'main-price': "150",
@@ -61,7 +61,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "1",
+        'id': "3",
         'name': "Simple Desk",
         'thumbnail-image': "assets/images/product_image_2.png",
         'main-price': "55",
@@ -72,7 +72,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "0",
+        'id': "4",
         'name': "Black Simple Lamp",
         'thumbnail-image': "assets/images/product_image_3.png",
         'main-price': "120",
@@ -83,7 +83,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "1",
+        'id': "5",
         'name': "Minimal Stand",
         'thumbnail-image': "assets/images/product_image_1.png",
         'main-price': "200",
@@ -94,7 +94,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "1",
+        'id': "6",
         'name': "Coffee Chair",
         'thumbnail-image': "assets/images/product_image_4.png",
         'main-price': "150",
@@ -105,7 +105,7 @@ class ProductModel extends Product {
         'sales': 120,
       },
       {
-        'id': "1",
+        'id': "7",
         'name': "Simple Desk",
         'thumbnail-image': "assets/images/product_image_2.png",
         'main-price': "55",

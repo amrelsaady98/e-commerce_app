@@ -5,12 +5,12 @@ import 'package:shop_app/core/base/data_state/data_state.dart';
 import 'package:shop_app/core/base/usecases/usecase.dart';
 
 class GetAllCartItemsUseCase
-    extends UseCase<DataState<List<CartItem<Product>>>, void> {
+    extends UseCase<DataState<List<CartItem>>, void> {
   GetAllCartItemsUseCase(this._cartRepository);
 
   final CartRepository _cartRepository;
   @override
-  Future<DataState<List<CartItem<Product>>>> call({void params}) async {
+  Future<DataState<List<CartItem>>> call({void params}) async {
     return await _cartRepository.fetchCartItems();
   }
 }
