@@ -19,6 +19,7 @@ dependencies:
   google_sign_in: ^6.2.1
   rive: ^0.12.4
   shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
   sizer: ^2.0.15
 
 dev_dependencies:

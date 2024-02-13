@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/domain/entities/cart_item.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
@@ -49,7 +50,11 @@ class CartItemTile extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: onRemovePressed,
-                      child: const Icon(Icons.close_rounded),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                            SvgPicture.asset('assets/vectors/icon_close.svg'),
+                      ),
                     ),
                   ],
                 ),
@@ -59,15 +64,15 @@ class CartItemTile extends StatelessWidget {
                 ),
                 Expanded(child: Container()),
                 ProductCounter(
-                    count: cartItem.count,
-                    increse: onIcreasePressed,
-                    decrese: onDecreasePressed),
+                  count: cartItem.count,
+                  increse: onIcreasePressed,
+                  decrese: onDecreasePressed,
+                ),
               ],
             ),
           )
         ],
       ),
     );
-    ;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shop_app/app/domain/entities/category.dart';
 
 import 'package:shop_app/app/domain/entities/product.dart';
@@ -44,22 +45,17 @@ class ProductItem extends StatelessWidget {
                     end: 12,
                     bottom: 12,
                     child: GestureDetector(
-                      onTap: () {
-                        // TODO: add to cart
-                      },
-                      child: GestureDetector(
-                        onTap: () => onAddToCartPressed(index: index),
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              color: Get.theme.colorScheme.secondary
-                                  .withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: SvgPicture.asset(
-                              'assets/vectors/icon_add_to_cart.svg'),
-                        ),
+                      onTap: () => onAddToCartPressed(index: index),
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                            color: Get.theme.colorScheme.secondary
+                                .withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: SvgPicture.asset(
+                            'assets/vectors/icon_add_to_cart.svg'),
                       ),
                     ),
                   )
@@ -80,6 +76,54 @@ class ProductItem extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductItemShimmer extends StatelessWidget {
+  const ProductItemShimmer({
+    super.key,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Get.theme.colorScheme.primary.withOpacity(0.3),
+      highlightColor: Get.theme.colorScheme.primary.withOpacity(0.05),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              color: Get.theme.colorScheme.primary.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Container(
+            width: double.infinity,
+            height: 14,
+            decoration: BoxDecoration(
+              color: Get.theme.colorScheme.primary.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Container(
+            width: 72,
+            height: 14,
+            decoration: BoxDecoration(
+              color: Get.theme.colorScheme.primary.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
         ],
@@ -138,6 +182,37 @@ class CategoryItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CategoryItemShimmer extends StatelessWidget {
+  const CategoryItemShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Shimmer.fromColors(
+          baseColor: Get.theme.colorScheme.primary.withOpacity(0.3),
+          highlightColor: Get.theme.colorScheme.primary.withOpacity(0.05),
+          child: Column(
+            children: [
+              Container(
+                height: 28 + 16,
+                width: 28 + 16,
+                margin: const EdgeInsets.symmetric(
+                    horizontal: (72 - 44) / 2, vertical: (72 - 64) / 2),
+                decoration: BoxDecoration(
+                  color: Get.theme.colorScheme.primary.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 18),
+      ],
     );
   }
 }

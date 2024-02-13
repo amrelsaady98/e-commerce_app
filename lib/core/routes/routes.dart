@@ -20,7 +20,9 @@ class Routes {
   static String MAIN_PAGE = '/main';
   static String HOME_PAGE = '/home';
   static String FAVOURITES_PAGE = '/favourites';
-  static String PRODUCT_DETAILS_PAGE = '/product_details';
+  static String NOTIFICATIONS_PAGE = '/notifications';
+  static String PROFILE_PAGE = '/profile';
+  static String PRODUCT_DETAILS_PAGE = '/product-details';
   static String LOGIN_PAGE = '/login';
   static String SIGNUP_PAGE = '/register';
   static String SEARCH_PAGE = '/search';

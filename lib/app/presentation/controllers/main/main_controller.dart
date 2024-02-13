@@ -11,6 +11,8 @@ import 'package:shop_app/app/presentation/pages/authintication/login_page.dart';
 import 'package:shop_app/app/presentation/pages/home/favourite_page.dart';
 import 'package:shop_app/app/presentation/pages/home/home_page.dart';
 import 'package:shop_app/app/presentation/pages/home/main_page.dart';
+import 'package:shop_app/app/presentation/pages/home/notifications_page.dart';
+import 'package:shop_app/app/presentation/pages/home/profile_page.dart';
 import 'package:shop_app/app/presentation/pages/intro_page/intro_page.dart';
 import 'package:shop_app/core/routes/routes.dart';
 
@@ -44,8 +46,8 @@ class MainController extends GetxController {
   final List<String> pages = [
     Routes.HOME_PAGE,
     Routes.FAVOURITES_PAGE,
-    "Notification",
-    "Profile"
+    Routes.NOTIFICATIONS_PAGE,
+    Routes.PROFILE_PAGE
   ];
   @override
   void onInit() {
@@ -67,22 +69,32 @@ class MainController extends GetxController {
   }
 
   Route? onGenerateRoute(RouteSettings settings) {
-    if (settings.name == Routes.HOME_PAGE)
+    if (settings.name == Routes.HOME_PAGE) {
       return GetPageRoute(
         settings: settings,
-        page: () => HomePage(),
+        page: () => const HomePage(),
         bindings: [HomeBindings()],
       );
-    if (settings.name == Routes.INTRO_PAGE)
+    }
+    if (settings.name == Routes.FAVOURITES_PAGE) {
       return GetPageRoute(
         settings: settings,
-        page: () => IntroPage(),
+        page: () => const FavouritesPage(),
       );
-    if (settings.name == Routes.FAVOURITES_PAGE)
+    }
+    if (settings.name == Routes.NOTIFICATIONS_PAGE) {
       return GetPageRoute(
         settings: settings,
-        page: () => FavouritesPage(),
+        page: () => const NotificationPage(),
       );
+    }
+    if (settings.name == Routes.PROFILE_PAGE) {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const ProfilePage(),
+      );
+    }
+      
 
     return null;
   }

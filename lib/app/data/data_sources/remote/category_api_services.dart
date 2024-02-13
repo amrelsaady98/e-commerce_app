@@ -3,7 +3,7 @@ import 'package:shop_app/app/data/models/category_model.dart';
 
 class CategoryApiServices {
   Future<Response<Map<String, dynamic>>> fetchAllCategories() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 5));
     Map<String, dynamic> body = CategoryModel.catigories;
 
     Map<String, String> headers = {

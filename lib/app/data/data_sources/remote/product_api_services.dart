@@ -3,9 +3,8 @@ import 'package:shop_app/app/data/models/product_model.dart';
 
 class ProductApiServices {
   Future<Response<Map<String, dynamic>>> fetchAllProducts() async {
-
-    //TODO: implement network manager features 
-    await Future.delayed(const Duration(seconds: 5));
+    //TODO: implement network manager features
+    await Future.delayed(const Duration(seconds: 9));
     Map<String, dynamic> body = ProductModel.products;
 
     Map<String, String> headers = {

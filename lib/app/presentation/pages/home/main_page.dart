@@ -43,6 +43,7 @@ class MainPage extends GetView<MainController> {
             controller.bottomNavItems.length,
             (index) => GestureDetector(
               onTap: () {
+                if (controller.selectedIndex.value == index) return;
                 if (controller.animationControllers[index] is SMIBool) {
                   controller.animationControllers[index]?.change(true);
                   Future.delayed(const Duration(seconds: 1)).whenComplete(() {
@@ -62,6 +63,7 @@ class MainPage extends GetView<MainController> {
                   ],
                   onInit: (Artboard artboard) =>
                       controller.onInitRiveAnimation(artboard, index),
+                      
                 ),
               ),
             ),

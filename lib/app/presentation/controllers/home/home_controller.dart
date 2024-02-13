@@ -14,6 +14,9 @@ class HomeController extends GetxController {
   RxList<Category> categories = RxList<Category>([]);
   RxList<Product> products = RxList<Product>([]);
 
+  RxBool isCategoryLoading = false.obs;
+  RxBool isProductLoading = false.obs;
+
   final _getAllCategoriesUseCase = Get.find<GetAllCategoriesUsecase>();
   final _getAllProductsUseCase = Get.find<GetAllProductsUseCase>();
   var selectedCategoryIndex = 0.obs;
@@ -26,6 +29,7 @@ class HomeController extends GetxController {
   }
 
   void fetchAllCategories() async {
+    isCategoryLoading.value = true;
     var data = await _getAllCategoriesUseCase.call();
     if (data is DataSuccess) {
       categories.clear();
@@ -40,9 +44,11 @@ class HomeController extends GetxController {
         messageText: Text((data.exception as GetHttpException).message),
       ));
     }
+    isCategoryLoading.value = false;
   }
 
   void fetchAllProducts() async {
+    isProductLoading.value = true;
     var data = await _getAllProductsUseCase.call();
     if (data is DataSuccess) {
       products.clear();
@@ -50,18 +56,24 @@ class HomeController extends GetxController {
         products.addAll(data.data!);
       }
     } else {
-      Get.showSnackbar(GetSnackBar(
-        duration: Duration(seconds: 2),
-        title: "error",
-        backgroundColor: AppColors.red,
-        messageText: Text((data.exception as GetHttpException).message),
-      ));
+      Get.showSnackbar(
+        GetSnackBar(
+          duration: const Duration(seconds: 2),
+          title: "error",
+          backgroundColor: AppColors.red,
+          messageText: Text((data.exception as GetHttpException).message),
+        ),
+      );
     }
+
+    isProductLoading.value = false;
   }
 
   void categoryItempresed(int index) {
+    isProductLoading.value = true;
     selectedCategoryIndex.value = index;
-    selectedCategoryIndex.refresh();
+    Future.delayed(Durations.long4)
+        .whenComplete(() => isProductLoading.value = false);
   }
 
   void addToCartPressed({required int index}) async {

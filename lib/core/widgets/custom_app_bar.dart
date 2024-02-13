@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -33,7 +35,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(88);
 }
 
-class CustomAppBarWithAction extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBarWithAction extends StatelessWidget
+    implements PreferredSizeWidget {
   const CustomAppBarWithAction({
     super.key,
     this.title,
@@ -53,14 +56,22 @@ class CustomAppBarWithAction extends StatelessWidget implements PreferredSizeWid
       surfaceTintColor: Colors.transparent,
       leading: GestureDetector(
         onTap: onLeadingPressed,
-        child: leading,
+        child: Container(
+          height: 12,
+          width: 12,
+          padding: EdgeInsets.all(14),
+          child: SvgPicture.asset(
+            'assets/vectors/search_icon.svg',
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
       actions: [
         GestureDetector(
           onTap: onLeadingPressed,
-          child: action,
+          child: SvgPicture.asset('assets/vectors/cart_icon.svg'),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 24),
       ],
       title: Text(
         "$title",
@@ -77,4 +88,63 @@ class CustomAppBarWithAction extends StatelessWidget implements PreferredSizeWid
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(88);
+}
+
+SliverAppBar cutstomSliverAppBar({
+  void Function()? onCartIconPressed,
+  void Function()? onSearchIconPressed,
+  List<InlineSpan>? textSpan,
+  bool viewActionIcon = true,
+  bool viewLeadingIcon = true,
+  bool pinned = true,
+  String actionAsset = 'assets/vectors/cart_icon.svg',
+  String leadingAsset = 'assets/vectors/search_icon.svg',
+}) {
+  return SliverAppBar.medium(
+    expandedHeight: 48 * 2.5,
+    collapsedHeight: 48 * 2.5,
+    stretchTriggerOffset: 20,
+    backgroundColor: Get.theme.colorScheme.surface,
+    surfaceTintColor: Get.theme.colorScheme.surface,
+    pinned: pinned,
+    stretch: false,
+    snap: false,
+    primary: false,
+    toolbarHeight: 0,
+    automaticallyImplyLeading: false,
+    flexibleSpace: Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 36),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: onSearchIconPressed,
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child:
+                      viewLeadingIcon ? SvgPicture.asset(leadingAsset) : null,
+                ),
+              ),
+              Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(children: textSpan),
+              ),
+              GestureDetector(
+                onTap: onCartIconPressed,
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: viewActionIcon ? SvgPicture.asset(actionAsset) : null,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
