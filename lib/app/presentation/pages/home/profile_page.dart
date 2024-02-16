@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/presentation/pages/home/profile_page_widgets.dart';
+import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
 class ProfilePage extends GetView {
@@ -40,10 +41,11 @@ class ProfilePage extends GetView {
               subtitle: "Already have 10 orders",
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: ProfileFeatureItem(
               title: "Shipping Addresses",
               subtitle: "3 Addresses",
+              onItemPressed: () => Get.toNamed(Routes.SHIPPING_ADDRESSES_PAGE),
             ),
           ),
           const SliverToBoxAdapter(

@@ -29,7 +29,7 @@ class ProductItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: "product_image$index",
+            tag: "product_image${item.id}",
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Stack(

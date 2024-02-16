@@ -6,10 +6,10 @@ class CartController extends GetxController {
   var cartList = Get.find<CartManager>().cartItems;
   var cartTotal = Get.find<CartManager>().cartTotal;
   RxBool isLoading = false.obs;
+  RxBool iscartListSynced = true.obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
   }
 

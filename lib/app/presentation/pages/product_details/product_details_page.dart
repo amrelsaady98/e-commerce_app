@@ -19,7 +19,7 @@ class ProductDetailsPage extends GetView {
                 Container(
                   margin: const EdgeInsets.only(left: 54),
                   child: Hero(
-                    tag: "product_image${Get.parameters['index']}",
+                    tag: "product_image${Get.parameters['id']}",
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(48)),

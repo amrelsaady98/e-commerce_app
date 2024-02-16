@@ -12,6 +12,7 @@ import 'package:shop_app/app/presentation/pages/home/home_page.dart';
 import 'package:shop_app/app/presentation/pages/home/main_page.dart';
 import 'package:shop_app/app/presentation/pages/intro_page/intro_page.dart';
 import 'package:shop_app/app/presentation/pages/product_details/product_details_page.dart';
+import 'package:shop_app/app/presentation/pages/shiping/shipping_addresses_page.dart';
 import 'package:shop_app/app/presentation/pages/splash_page/splash_page.dart';
 
 class Routes {
@@ -23,6 +24,7 @@ class Routes {
   static String NOTIFICATIONS_PAGE = '/notifications';
   static String PROFILE_PAGE = '/profile';
   static String PRODUCT_DETAILS_PAGE = '/product-details';
+  static String SHIPPING_ADDRESSES_PAGE = '/shipping-addresses';
   static String LOGIN_PAGE = '/login';
   static String SIGNUP_PAGE = '/register';
   static String SEARCH_PAGE = '/search';
@@ -53,6 +55,10 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.PRODUCT_DETAILS_PAGE,
     page: () => const ProductDetailsPage(),
+  ),
+  GetPage(
+    name: Routes.SHIPPING_ADDRESSES_PAGE,
+    page: () => const ShippingAddressesPage(),
   ),
   GetPage(
     name: Routes.SPLASH_PAGE,

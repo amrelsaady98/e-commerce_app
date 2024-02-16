@@ -25,6 +25,18 @@ class ProductModel extends Product {
         sales: json['sales'],
       );
 
+      Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'thumbnail-image': thumbnailImage,
+        'main-price': mainPrice,
+        'stroked-price': strokedPrice,
+        'has-discount': hasDiscount,
+        'discount': discount,
+        'rating': rating,
+        'sales': sales,
+      };
+
   static const products = {
     'products': [
       {

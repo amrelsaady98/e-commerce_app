@@ -91,8 +91,8 @@ class CustomAppBarWithAction extends StatelessWidget
 }
 
 SliverAppBar cutstomSliverAppBar({
-  void Function()? onCartIconPressed,
-  void Function()? onSearchIconPressed,
+  void Function()? onActionIconPressed,
+  void Function()? onLeadingIconPressed,
   List<InlineSpan>? textSpan,
   bool viewActionIcon = true,
   bool viewLeadingIcon = true,
@@ -121,7 +121,7 @@ SliverAppBar cutstomSliverAppBar({
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: onSearchIconPressed,
+                onTap: onLeadingIconPressed,
                 child: SizedBox(
                   height: 24,
                   width: 24,
@@ -134,7 +134,7 @@ SliverAppBar cutstomSliverAppBar({
                 TextSpan(children: textSpan),
               ),
               GestureDetector(
-                onTap: onCartIconPressed,
+                onTap: onActionIconPressed,
                 child: SizedBox(
                   height: 24,
                   width: 24,

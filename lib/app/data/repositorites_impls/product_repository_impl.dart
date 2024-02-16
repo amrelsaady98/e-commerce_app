@@ -20,8 +20,6 @@ class ProductRepositoryImpl extends ProductRepository {
               .toList();
       return DataSuccess<List<ProductModel>>(categories);
     } else {
-
-      // TODO: retrive local data from local data source
       return DataField(
           GetHttpException(response.statusText ?? "Connection Failed"));
     }

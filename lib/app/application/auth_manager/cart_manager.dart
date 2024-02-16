@@ -4,16 +4,25 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/app/domain/entities/cart_item.dart';
-import 'package:shop_app/app/domain/entities/product.dart';
+import 'package:shop_app/app/domain/repositories/cart_repository.dart';
 import 'package:shop_app/app/domain/use_cases/cart_use_cases/get_all_cart_items_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/cart_use_cases/get_local_cart_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/cart_use_cases/save_local_cart_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/cart_use_cases/sync_cart_list_use_case.dart';
 import 'package:shop_app/core/base/data_state/data_state.dart';
 
 class CartManager extends GetxController {
   RxList<CartItem> cartItems = <CartItem>[].obs;
   RxDouble cartTotal = 0.0.obs;
 
-  // final GetAllCartItemsUseCase _getAllCartItemsUseCase =
-  //     Get.find<GetAllCartItemsUseCase>();
+  final GetRemoteCartItemsUseCase _getRemoteCartItemsUseCase =
+      Get.find<GetRemoteCartItemsUseCase>();
+  final GetLocalCartItemsUseCase _getLocalCartsUseCase =
+      Get.find<GetLocalCartItemsUseCase>();
+  final SyncCartItemsUseCase _syncCartItemsUseCase =
+      Get.find<SyncCartItemsUseCase>();
+  final SaveLocalCartUseCase _saveCartItemsUseCase =
+      Get.find<SaveLocalCartUseCase>();
   @override
   void onInit() {
     super.onInit();
@@ -24,43 +33,29 @@ class CartManager extends GetxController {
   /// if success write to local the update [cartItems] then return,
   /// if failed load from local to [cartItems];
   Future<void> _initCartItems() async {
-    // var data = await _getAllCartItemsUseCase.call();
-    if (/* data is DataSuccess */ false) {
-      /* cartItems.clear();
+    _loadFromLocal();
+    return;
+    var data = await _getRemoteCartItemsUseCase.call();
+    if (data is DataSuccess) {
+      cartItems.clear();
       if (data.data?.isEmpty ?? true) return;
       cartItems.addAll(data.data ?? []);
-      await _updateLocal(data.data!); */
-    } else {
-      _loadFromLocal();
-    }
+      await _updateLocal(data.data!);
+    } else {}
   }
 
   Future<void> _updateLocal(List<CartItem> cartItems) async {
-    final box = GetStorage();
-    box.remove('cart_items');
-
-    Map<String, Map<String, dynamic>> data = {};
-
-    for (var item in cartItems) {
-      data[item.item.id] = item.toJson();
-    }
-
-    await box.write('cart_items', data);
+    await _saveCartItemsUseCase.call(params: cartItems);
   }
 
   /// update [cartItems] from local storage;
   Future<void> _loadFromLocal() async {
-    final box = GetStorage();
-    final localData = box.read('cart_items') as Map<String, dynamic>?;
+    final data = await _getLocalCartsUseCase.call();
 
-    if (localData == null) return;
-    List<CartItem> cartData = [];
+    if (data == null) return;
 
-    for (var element in localData.keys) {
-      cartData.add(CartItem.fromJson(localData[element]));
-    }
     cartItems.clear();
-    cartItems.addAll(cartData);
+    cartItems.addAll(data);
   }
 
   /// detrmine wether [toAddItem] is added before or add for first time;
@@ -77,7 +72,6 @@ class CartManager extends GetxController {
       cartItems.add(toAddItem);
     }
     await _updateLocal(cartItems);
-    //TODO: update remote
   }
 
   /// find [cartItem] index then remove itm matches this index form [cartItems];

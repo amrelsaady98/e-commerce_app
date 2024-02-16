@@ -40,7 +40,7 @@ class HomePage extends GetView<HomeController> {
                 ),
               ),
             ],
-            onCartIconPressed: () => Get.toNamed(Routes.CART_PAGE),
+            onActionIconPressed: () => Get.toNamed(Routes.CART_PAGE),
           ),
           SliverToBoxAdapter(
             child: Obx(
