@@ -14,7 +14,7 @@ class ProfilePage extends GetView {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          cutstomSliverAppBar(
+          customSliverAppBar(
             pinned: false,
             actionAsset: 'assets/vectors/icon_logout.svg',
             textSpan: [

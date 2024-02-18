@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:shop_app/app/presentation/controllers/address/add_address_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/cart/cart_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
@@ -12,6 +13,7 @@ import 'package:shop_app/app/presentation/pages/home/home_page.dart';
 import 'package:shop_app/app/presentation/pages/home/main_page.dart';
 import 'package:shop_app/app/presentation/pages/intro_page/intro_page.dart';
 import 'package:shop_app/app/presentation/pages/product_details/product_details_page.dart';
+import 'package:shop_app/app/presentation/pages/shiping/add_shipping_address_page.dart';
 import 'package:shop_app/app/presentation/pages/shiping/shipping_addresses_page.dart';
 import 'package:shop_app/app/presentation/pages/splash_page/splash_page.dart';
 
@@ -25,6 +27,7 @@ class Routes {
   static String PROFILE_PAGE = '/profile';
   static String PRODUCT_DETAILS_PAGE = '/product-details';
   static String SHIPPING_ADDRESSES_PAGE = '/shipping-addresses';
+  static String ADD_SHIPPING_ADDRESSES_PAGE = '/add-shipping-addresses';
   static String LOGIN_PAGE = '/login';
   static String SIGNUP_PAGE = '/register';
   static String SEARCH_PAGE = '/search';
@@ -59,6 +62,11 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.SHIPPING_ADDRESSES_PAGE,
     page: () => const ShippingAddressesPage(),
+  ),
+  GetPage(
+    name: Routes.ADD_SHIPPING_ADDRESSES_PAGE,
+    page: () => const AddShippingAddressPage(),
+    binding: AddAddressBindings(),
   ),
   GetPage(
     name: Routes.SPLASH_PAGE,

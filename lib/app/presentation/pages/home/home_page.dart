@@ -21,7 +21,7 @@ class HomePage extends GetView<HomeController> {
     return Container(
       child: CustomScrollView(
         slivers: [
-          cutstomSliverAppBar(
+          customSliverAppBar(
             textSpan: [
               TextSpan(
                 text: 'Make home\n',

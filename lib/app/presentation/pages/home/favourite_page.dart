@@ -19,7 +19,7 @@ class FavouritesPage extends GetView {
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: [
-                cutstomSliverAppBar(textSpan: [
+                customSliverAppBar(textSpan: [
                   TextSpan(
                     text: "Favourites",
                     style: GoogleFonts.merriweather(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
 class ShippingAddressesPage extends GetView {
@@ -11,9 +12,14 @@ class ShippingAddressesPage extends GetView {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed(Routes.ADD_SHIPPING_ADDRESSES_PAGE),
+        shape: const CircleBorder(eccentricity: 0.1),
+        child: const Icon(Icons.add),
+      ),
       body: CustomScrollView(
         slivers: [
-          cutstomSliverAppBar(
+          customSliverAppBar(
             leadingAsset: 'assets/vectors/icon_left_arrow.svg',
             viewActionIcon: false,
             onLeadingIconPressed: () => Get.back(),

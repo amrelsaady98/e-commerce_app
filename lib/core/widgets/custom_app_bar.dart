@@ -90,7 +90,7 @@ class CustomAppBarWithAction extends StatelessWidget
   Size get preferredSize => const Size.fromHeight(88);
 }
 
-SliverAppBar cutstomSliverAppBar({
+SliverAppBar customSliverAppBar({
   void Function()? onActionIconPressed,
   void Function()? onLeadingIconPressed,
   List<InlineSpan>? textSpan,

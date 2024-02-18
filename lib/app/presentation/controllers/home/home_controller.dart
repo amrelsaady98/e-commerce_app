@@ -65,7 +65,6 @@ class HomeController extends GetxController {
         ),
       );
     }
-
     isProductLoading.value = false;
   }
 

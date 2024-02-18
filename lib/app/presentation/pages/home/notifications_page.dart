@@ -18,7 +18,7 @@ class NotificationPage extends GetView {
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: [
-                cutstomSliverAppBar(
+                customSliverAppBar(
                   viewActionIcon: false,
                   textSpan: [
                     TextSpan(
