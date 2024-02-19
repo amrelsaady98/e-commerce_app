@@ -21,9 +21,9 @@ class AddressRepositoryImpl extends AddressRepository {
         addressList.add(AddressModel.fromJson(element));
       }
     }
-    addressList.add(address as AddressModel);
+    addressList.add( AddressModel.fromEntity(address));
     _addressLocalServices.updateAddressList(addressList);
-    await _addressApiServices.addAddress(address: address);
+    await _addressApiServices.addAddress(address: AddressModel.fromEntity(address));
   }
 
   @override

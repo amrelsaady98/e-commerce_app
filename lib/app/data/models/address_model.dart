@@ -6,6 +6,7 @@ class AddressModel extends Address {
     required super.addressTitle,
     required super.addressLine,
     required super.governorate,
+    required super.phoneNumber,
     required super.city,
   });
 
@@ -13,14 +14,26 @@ class AddressModel extends Address {
         id: json['id'],
         addressTitle: json['address-title'],
         addressLine: json['address-line'],
+        phoneNumber: json['phone-number'],
         governorate: Governorate.fromJson(json['governorate']),
         city: City.fromJson(json['city']),
       );
 
   Map<String, dynamic> toJson() => {
-        'addressTitle': addressTitle,
-        'addressLine': addressLine,
+        'id': id,
+        'address-title': addressTitle,
+        'address-line': addressLine,
+        'phone-number': phoneNumber,
         'governorate': governorate.toJson(),
         'city': city.toJson()
       };
+
+  factory AddressModel.fromEntity(Address entity) => AddressModel(
+        id: entity.id,
+        addressTitle: entity.addressTitle,
+        addressLine: entity.addressLine,
+        governorate: entity.governorate,
+        phoneNumber: entity.phoneNumber,
+        city: entity.city,
+      );
 }

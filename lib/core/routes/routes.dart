@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shop_app/app/presentation/controllers/address/add_address_bindings.dart';
+import 'package:shop_app/app/presentation/controllers/address/address_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/cart/cart_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
@@ -62,6 +63,7 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.SHIPPING_ADDRESSES_PAGE,
     page: () => const ShippingAddressesPage(),
+    binding: AddressBindings(),
   ),
   GetPage(
     name: Routes.ADD_SHIPPING_ADDRESSES_PAGE,

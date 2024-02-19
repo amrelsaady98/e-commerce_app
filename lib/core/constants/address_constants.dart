@@ -96,7 +96,7 @@ const List<Map<String, dynamic>> governorates = [
   {"id": "27", "governorate_name_ar": "سوهاج", "governorate_name_en": "Sohag"}
 ];
 
-const List<Map<String, dynamic>> cities = [
+const List<Map<String, dynamic>> CITIES_LIST = [
   {
     "id": "1",
     "governorate_id": "1",
