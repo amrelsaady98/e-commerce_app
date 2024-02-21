@@ -52,8 +52,10 @@ class ShippingAddressesPage extends GetView<AddressController> {
                           width: 24,
                           height: 24,
                           child: Checkbox(
-                            value: true,
-                            onChanged: (value) {},
+                            value: controller.addressList[index].isDefault,
+                            onChanged: (value) =>
+                                controller.onDefaultChekboxPressed(index, value),
+                                
                           ),
                         ),
                         const SizedBox(width: 4),

@@ -5,8 +5,9 @@ class AddressModel extends Address {
     required super.id,
     required super.addressTitle,
     required super.addressLine,
-    required super.governorate,
     required super.phoneNumber,
+    super.isDefault,
+    required super.governorate,
     required super.city,
   });
 
@@ -15,6 +16,7 @@ class AddressModel extends Address {
         addressTitle: json['address-title'],
         addressLine: json['address-line'],
         phoneNumber: json['phone-number'],
+        isDefault: json['is-default'],
         governorate: Governorate.fromJson(json['governorate']),
         city: City.fromJson(json['city']),
       );
@@ -24,6 +26,7 @@ class AddressModel extends Address {
         'address-title': addressTitle,
         'address-line': addressLine,
         'phone-number': phoneNumber,
+        'is-default': isDefault,
         'governorate': governorate.toJson(),
         'city': city.toJson()
       };
@@ -33,6 +36,7 @@ class AddressModel extends Address {
         addressTitle: entity.addressTitle,
         addressLine: entity.addressLine,
         governorate: entity.governorate,
+        isDefault: entity.isDefault,
         phoneNumber: entity.phoneNumber,
         city: entity.city,
       );

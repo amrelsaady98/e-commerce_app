@@ -3,6 +3,7 @@ class Address {
   String addressTitle;
   String addressLine;
   String phoneNumber;
+  bool isDefault;
   // final String country;
   Governorate governorate;
   City city;
@@ -12,6 +13,7 @@ class Address {
     required this.addressTitle,
     required this.addressLine,
     required this.phoneNumber,
+    this.isDefault = false,
     // required this.country,
     required this.governorate,
     required this.city,

@@ -21,9 +21,10 @@ class AddressRepositoryImpl extends AddressRepository {
         addressList.add(AddressModel.fromJson(element));
       }
     }
-    addressList.add( AddressModel.fromEntity(address));
+    addressList.add(AddressModel.fromEntity(address));
     _addressLocalServices.updateAddressList(addressList);
-    await _addressApiServices.addAddress(address: AddressModel.fromEntity(address));
+    await _addressApiServices.addAddress(
+        address: AddressModel.fromEntity(address));
   }
 
   @override
@@ -37,6 +38,15 @@ class AddressRepositoryImpl extends AddressRepository {
       }
     }
     return addressList;
+  }
+
+  @override
+  Future updateLocalAddressList(List<Address> addressList) async {
+    List<AddressModel> addressModelList = [];
+    for (var element in addressList) {
+      addressModelList.add(AddressModel.fromEntity(element));
+    }
+    _addressLocalServices.updateAddressList(addressModelList);
   }
 
   @override

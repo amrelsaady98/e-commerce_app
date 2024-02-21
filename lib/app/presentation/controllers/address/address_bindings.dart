@@ -6,6 +6,7 @@ import 'package:shop_app/app/domain/repositories/address_repository.dart';
 import 'package:shop_app/app/domain/use_cases/address_use_cases/add_address_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/address_use_cases/get_local_addresses_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/address_use_cases/get_remote_addresses_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/address_use_cases/update_local_address_list_use_case.dart';
 import 'package:shop_app/app/presentation/controllers/address/address_controller.dart';
 
 class AddressBindings extends Bindings {
@@ -16,6 +17,8 @@ class AddressBindings extends Bindings {
     Get.lazyPut(() => GetRemoteAddressesUsecase(
         AddressRepositoryImpl(AddressApiServices(), AddressLocalServices())));
     Get.lazyPut(() => GetLocalAddressesUsecase(
+        AddressRepositoryImpl(AddressApiServices(), AddressLocalServices())));
+    Get.lazyPut(() => UpdateLocalAddressListUseCase(
         AddressRepositoryImpl(AddressApiServices(), AddressLocalServices())));
     Get.lazyPut(() => AddressController());
   }
