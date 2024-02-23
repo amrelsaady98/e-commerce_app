@@ -52,7 +52,7 @@ class ProfilePage extends GetView {
             child: ProfileFeatureItem(
               title: "Payment Method",
               subtitle: "You have 2 cards",
-              onItemPressed: () => Get.toNamed(Routes.ADD_PAYMENT_METHOD_PAGE),
+              onItemPressed: () => Get.toNamed(Routes.PAYMENT_CARDS_PAGE),
             ),
           ),
           const SliverToBoxAdapter(

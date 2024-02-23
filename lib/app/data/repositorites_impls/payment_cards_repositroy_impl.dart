@@ -75,7 +75,7 @@ class PaymentCardsRepositoryImpl extends PaymentCardsRepository {
 
   @override
   Future<DataState<List<PaymentCard>>> getLocalPaymentCardList() async {
-    return _localServices.getPaymentCardList();
+    return await _localServices.getPaymentCardList();
   }
 
   @override
@@ -96,8 +96,33 @@ class PaymentCardsRepositoryImpl extends PaymentCardsRepository {
   }
 
   @override
-  Future<DataState> updatePaymentCard(PaymentCard paymentCard) {
-    // TODO: implement updatePaymentCard
-    throw UnimplementedError();
+  Future<DataState> updatePaymentCard(PaymentCard paymentCard) async {
+    try {
+      /* final remoteResponse = await _apiServices
+          .updatePaymentCard(PaymentCardModel.fromEntity(paymentCard)); */
+      // get locally saved card list;
+      List<PaymentCardModel>? localData =
+          _localServices.getPaymentCardList().data;
+      // if [localSavedData] is null it's first item to add;
+      if (localData != null && localData.isNotEmpty) {
+        final paymentCardModel = PaymentCardModel.fromEntity(paymentCard);
+        final itemIndex =
+            localData.indexWhere((element) => element.id == paymentCard.id);
+        if (itemIndex >= 0) {
+          localData[itemIndex] = paymentCardModel;
+          _localServices.saveLocalCardList(localData);
+          return DataSuccess(null);
+        } else {
+          return DataField(Exception('Item did not found in Local Storage'));
+        }
+      } else {
+        return DataField(Exception('No Cards Saved in Local Storage!'));
+      }
+    } catch (error) {
+      if (kDebugMode) {
+        print(error.toString());
+      }
+      return DataField(Exception(error.toString()));
+    }
   }
 }

@@ -17,10 +17,8 @@ class PaymentCardsLocalServices {
         for (var key in localData.keys) {
           paymentCardModelList.add(PaymentCardModel.fromJson(localData[key]));
         }
-        return DataSuccess(paymentCardModelList);
-      } else {
-        return DataField(Exception('failed'));
       }
+      return DataSuccess(paymentCardModelList);
     } catch (error) {
       if (kDebugMode) {
         print(error.toString());

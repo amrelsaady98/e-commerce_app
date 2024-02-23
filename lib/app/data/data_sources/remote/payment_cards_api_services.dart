@@ -74,12 +74,12 @@ class PaymentCardsApiServices {
       http.Response response =
           http.Response(jsonEncode(body), 200, headers: headers);
       if (response.statusCode >= 200 && response.statusCode <= 300) {
-        final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
-        final responseData = responseBody['data']['payment-cards'];
-        if (responseData != null) {
-          return DataSuccess(null);
-        }
+        /* final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
+        final responseData = null; */
+        /* if (responseData != null) {
+        } */
       }
+      return DataSuccess(null);
 
       return DataField(http.ClientException(response.headers['message'] ?? ""));
     } catch (error) {

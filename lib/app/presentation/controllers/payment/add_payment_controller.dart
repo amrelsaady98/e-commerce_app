@@ -7,6 +7,7 @@ import 'package:shop_app/app/domain/entities/payment_card.dart';
 import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/add_payment_card_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/get_local_payment_cards_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/get_remote_payment_cards_list_use_case.dart';
+import 'package:shop_app/core/theme/colors.dart';
 
 class AddPaymentController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -60,8 +61,9 @@ class AddPaymentController extends GetxController
           await _getLocalPaymentCardsListUseCase.call(params: null);
       _addPaymentCardUseCase.call(
           params: PaymentCard(
-        cardNumber: cardNumber.value!,
         id: "${savedList.data?.length ?? 0}",
+        isDefault: false,
+        cardNumber: cardNumber.value!,
         cardHolderName: cardHolderName.value!,
         cardExpiryDate: cardExpiryDate.value!,
         cardCVV: cardCVV.value!,
@@ -69,6 +71,7 @@ class AddPaymentController extends GetxController
       isAddLoading.value = false;
       Get.showSnackbar(
         const GetSnackBar(
+          backgroundColor: AppColors.success,
           duration: Duration(seconds: 2),
           message: "Card Added Successfully!",
         ),
@@ -82,20 +85,20 @@ class AddPaymentController extends GetxController
     cardExpiryDateError.value = null;
     cardCVVError.value = null;
 
-    if (cardNumber.value != null && cardNumber.value!.length < 16) {
-      cardNumberError.value = 'Invalid Card Number';
-      return false;
-    }
-    if (cardHolderName.value != null && cardHolderName.value!.isNotEmpty) {
+    if (cardHolderName.value == null || cardHolderName.value!.isEmpty) {
       cardHolderNameError.value = 'required';
       return false;
     }
-    if (cardExpiryDate.value != null && cardExpiryDate.value!.length < 4) {
-      cardExpiryDateError.value = 'Invalid Card Expiry Date';
+    if (cardNumber.value == null || cardNumber.value!.length < 16) {
+      cardNumberError.value = 'Invalid Card Number';
       return false;
     }
-    if (cardCVV.value != null && cardCVV.value!.length < 3) {
+    if (cardCVV.value == null || cardCVV.value!.length < 3) {
       cardCVVError.value = 'Invalid Card CVV';
+      return false;
+    }
+    if (cardExpiryDate.value == null || cardExpiryDate.value!.length < 5) {
+      cardExpiryDateError.value = 'Invalid Card Expiry Date';
       return false;
     }
     return true;

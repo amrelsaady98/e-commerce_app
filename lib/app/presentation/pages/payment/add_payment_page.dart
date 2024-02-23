@@ -49,135 +49,129 @@ class AddPaymentPage extends GetView<AddPaymentController> {
                                 pi * controller.animationController!.value)
                             ..scale(1 -
                                 (0.2 * controller.animationController!.value)),
-                          child: GestureDetector(
-                            onTap: () =>
-                                controller.animationController?.forward(),
-                            onDoubleTap: () =>
-                                controller.animationController?.reverse(),
-                            child: Obx(
-                              () => Container(
-                                height: 200,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: Get.theme.colorScheme.primary,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 24, vertical: 54),
-                                child: controller.animationController!.value <=
-                                        0.5
-                                    ? Stack(
+                          child: Obx(
+                            () => Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Get.theme.colorScheme.primary,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 24, vertical: 54),
+                              child: controller.animationController!.value <=
+                                      0.5
+                                  ? Stack(
+                                      children: [
+                                        Positioned(
+                                          bottom: 0,
+                                          right: -20,
+                                          child: Image.asset(
+                                              "assets/images/visa_card_vector.png"),
+                                        ),
+                                        Positioned(
+                                          top: 24,
+                                          left: 36,
+                                          child: Image.asset(
+                                              "assets/images/visa_logo.png"),
+                                        ),
+                                        Positioned(
+                                          top: 54,
+                                          left: 24,
+                                          child: Text(
+                                            (controller.cardNumber.value
+                                                        ?.isNotEmpty ??
+                                                    false)
+                                                ? controller.cardNumber.value!
+                                                : "**** **** **** 1234",
+                                            style: const TextStyle(
+                                              fontSize: 26,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: 24,
+                                          bottom: 54,
+                                          child: Text(
+                                            "Card Holder Name",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 24,
+                                          bottom: 54,
+                                          child: Text(
+                                            'Expiry Date',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: 24,
+                                          bottom: 28,
+                                          child: Text(
+                                            (controller.cardHolderName.value
+                                                        ?.isNotEmpty ??
+                                                    false)
+                                                ? controller
+                                                    .cardHolderName.value!
+                                                : "-----------------------",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 50,
+                                          bottom: 28,
+                                          child: Text(
+                                            (controller.cardExpiryDate.value
+                                                        ?.isNotEmpty ??
+                                                    false)
+                                                ? controller
+                                                    .cardExpiryDate.value!
+                                                : "##/##",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Transform(
+                                      alignment: FractionalOffset.center,
+                                      transform: Matrix4.identity()
+                                        ..rotateY(pi),
+                                      child: Stack(
                                         children: [
                                           Positioned(
-                                            bottom: 0,
-                                            right: -20,
-                                            child: Image.asset(
-                                                "assets/images/visa_card_vector.png"),
-                                          ),
-                                          Positioned(
-                                            top: 24,
-                                            left: 36,
-                                            child: Image.asset(
-                                                "assets/images/visa_logo.png"),
-                                          ),
-                                          Positioned(
-                                            top: 54,
-                                            left: 24,
-                                            child: Text(
-                                              (controller.cardNumber.value
-                                                          ?.isNotEmpty ??
-                                                      false)
-                                                  ? controller.cardNumber.value!
-                                                  : "**** **** **** 1234",
-                                              style: const TextStyle(
-                                                fontSize: 26,
-                                                color: Colors.white,
+                                            top: 56,
+                                            child: Expanded(
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 64,
+                                                    vertical: 4),
+                                                height: 36,
+                                                width: 350,
+                                                color: Colors.white
+                                                    .withOpacity(0.85),
+                                                child: Text("123"),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            left: 24,
-                                            bottom: 54,
-                                            child: Text(
-                                              "Card Holder Name",
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            right: 24,
-                                            bottom: 54,
-                                            child: Text(
-                                              'Expiry Date',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 24,
-                                            bottom: 28,
-                                            child: Text(
-                                              (controller.cardHolderName.value
-                                                          ?.isNotEmpty ??
-                                                      false)
-                                                  ? controller
-                                                      .cardHolderName.value!
-                                                  : "-----------------------",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            right: 50,
-                                            bottom: 28,
-                                            child: Text(
-                                              (controller.cardExpiryDate.value
-                                                          ?.isNotEmpty ??
-                                                      false)
-                                                  ? controller
-                                                      .cardExpiryDate.value!
-                                                  : "##/##",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
+                                          )
                                         ],
-                                      )
-                                    : Transform(
-                                        alignment: FractionalOffset.center,
-                                        transform: Matrix4.identity()
-                                          ..rotateY(pi),
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                              top: 56,
-                                              child: Expanded(
-                                                child: Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 64,
-                                                      vertical: 4),
-                                                  height: 36,
-                                                  width: 350,
-                                                  color: Colors.white
-                                                      .withOpacity(0.85),
-                                                  child: Text("123"),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
                                       ),
-                              ),
+                                    ),
                             ),
                           ),
                         );
@@ -209,7 +203,7 @@ class AddPaymentPage extends GetView<AddPaymentController> {
                         maxLines: 1,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
-                          errorText: controller.cardHolderName.value,
+                          errorText: controller.cardHolderNameError.value,
                           hintText: "Ex: Amr El-Saady",
                           labelText: "Card Holder Name",
                           // errorText: controller.addresTitleError.value,
@@ -305,11 +299,14 @@ class AddPaymentPage extends GetView<AddPaymentController> {
                                   ],
 
                                   focusNode: FocusNode(),
+                                  onChanged: (value) =>
+                                      controller.cardCVV.value = value,
                                   decoration: InputDecoration(
                                     errorText: controller.cardCVVError.value,
                                     contentPadding: EdgeInsets.zero,
                                     hintText: "123",
                                     labelText: "CVV",
+
                                     // errorText: controller.addresTitleError.value,
 
                                     floatingLabelBehavior:
