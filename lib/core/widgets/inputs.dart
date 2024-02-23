@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/core/theme/colors.dart';
 
@@ -150,6 +152,117 @@ class LoginTextField extends StatelessWidget {
         ),
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.red, width: 1),
+        ),
+      ),
+    );
+  }
+}
+
+class SquareBorederdTextInput extends StatelessWidget {
+  const SquareBorederdTextInput({
+    super.key,
+    this.label,
+    this.hint,
+    this.error,
+    this.onChanged,
+    this.formatters,
+    this.keyboardType,
+    this.textInputAction,
+    this.enabled = true,
+  });
+  final String? label, hint, error;
+  final bool enabled;
+  final void Function(String value)? onChanged;
+  final List<TextInputFormatter>? formatters;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: 12,
+        right: 12,
+        bottom: 8,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Get.theme.colorScheme.primary, width: 0.5),
+      ),
+      child: TextField(
+        enabled: true,
+        keyboardType: TextInputType.number,
+        onChanged: onChanged,
+        textInputAction: TextInputAction.next,
+        style: const TextStyle(fontSize: 18),
+        inputFormatters: formatters,
+        decoration: InputDecoration(
+          errorText: error,
+          contentPadding: EdgeInsets.zero,
+          labelText: label,
+          hintText: hint,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: const OutlineInputBorder(
+            gapPadding: 12,
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SquareTextInput extends StatelessWidget {
+  const SquareTextInput({
+    super.key,
+    this.label,
+    this.hint,
+    this.error,
+    this.maxLength,
+    this.onChanged,
+    this.formatters,
+    this.keyboardType,
+    this.textInputAction,
+    this.enabled = true,
+  });
+  final String? label, hint, error;
+  final bool enabled;
+  final void Function(String value)? onChanged;
+  final List<TextInputFormatter>? formatters;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final int? maxLength;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: 12,
+        right: 12,
+        bottom: 8,
+      ),
+      decoration: BoxDecoration(
+        color: Get.theme.colorScheme.secondaryContainer,
+      ),
+      child: TextField(
+        enabled: enabled,
+        textInputAction: textInputAction,
+        style: const TextStyle(fontSize: 18),
+        onChanged: onChanged,
+        maxLength: maxLength,
+        maxLines: 1,
+        keyboardType: keyboardType,
+        inputFormatters: formatters,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
+          errorText: error,
+          hintText: hint,
+          labelText: label,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: const OutlineInputBorder(
+            gapPadding: 12,
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );

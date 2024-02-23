@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/presentation/controllers/payment/payment_controller.dart';
+import 'package:shop_app/app/presentation/pages/payment/payment_cards_widgets.dart';
 import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
@@ -13,9 +14,10 @@ class PaymentCardsPage extends GetView<PaymentController> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-            onPressed: () => Get.toNamed(
-                  Routes.ADD_PAYMENT_METHOD_PAGE,
-                )),
+          onPressed: () => Get.toNamed(Routes.ADD_PAYMENT_METHOD_PAGE),
+          shape: const CircleBorder(eccentricity: 0.1),
+          child: const Icon(Icons.add),
+        ),
         body: CustomScrollView(
           slivers: [
             customSliverAppBar(
@@ -37,102 +39,25 @@ class PaymentCardsPage extends GetView<PaymentController> {
             Obx(
               () => SliverList.separated(
                 itemCount: controller.paymentCards.length,
-                separatorBuilder: (_, __) => SizedBox(
-                  height: 24,
-                ),
+                separatorBuilder: (_, __) => const SizedBox(height: 24),
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: controller.paymentCards[index].isDefault
-                              ? Get.theme.colorScheme.primary
-                              : Get.theme.colorScheme.primary.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              bottom: 0,
-                              right: -20,
-                              child: Image.asset(
-                                  "assets/images/visa_card_vector.png"),
-                            ),
-                            Positioned(
-                              top: 24,
-                              left: 36,
-                              child: Image.asset("assets/images/visa_logo.png"),
-                            ),
-                            Positioned(
-                              top: 54,
-                              left: 24,
-                              child: Text(
-                                controller.paymentCards[index].cardNumber,
-                                style: const TextStyle(
-                                  fontSize: 26,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 24,
-                              bottom: 54,
-                              child: Text(
-                                "Card Holder Name",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 24,
-                              bottom: 54,
-                              child: Text(
-                                'Expiry Date',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 24,
-                              bottom: 28,
-                              child: Text(
-                                controller.paymentCards[index].cardHolderName,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 50,
-                              bottom: 28,
-                              child: Text(
-                                controller.paymentCards[index].cardExpiryDate,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      PaymentCardWidget(
+                        cardNumber: controller.paymentCards[index].cardNumber,
+                        cardHolderName:
+                            controller.paymentCards[index].cardHolderName,
+                        cardExpiryDate:
+                            controller.paymentCards[index].cardExpiryDate,
+                        showBackSide: false,
+                        cardBackgroundColor: controller
+                                .paymentCards[index].isDefault
+                            ? Get.theme.colorScheme.primary
+                            : Get.theme.colorScheme.primary.withOpacity(0.6),
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 24),
+                        margin: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
                           children: [
                             SizedBox(
@@ -149,7 +74,7 @@ class PaymentCardsPage extends GetView<PaymentController> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              'Use as the shipping address',
+                              'Use as Default Payment Card',
                               style: GoogleFonts.nunitoSans(
                                 textStyle: const TextStyle(
                                   fontSize: 18,
