@@ -27,11 +27,13 @@ class SplashContorller extends GetxController {
     });
   }
 
+  //TODO: move to cashe manager
   bool? skipIntro() {
     final box = GetStorage();
     return box.read(SKIP_INTRO_KEY);
   }
 
+  //TODO: move to cashe manager
   Future<bool> firstAppRun() async {
     final box = GetStorage();
     await box.write(SKIP_INTRO_KEY, true);
