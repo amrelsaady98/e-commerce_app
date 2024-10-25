@@ -5,12 +5,13 @@ import 'package:shop_app/app/data/repositorites_impls/auth_repository_impl.dart'
 import 'package:shop_app/app/domain/repositories/auth_repository.dart';
 import 'package:shop_app/app/domain/use_cases/auth_use_cases/login_use_case.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_controller.dart';
+import 'package:shop_app/app/presentation/controllers/authentication/signup_controller.dart';
 
-class LoginBindings extends Bindings {
+class SignupBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => AuthManager());
     Get.lazyPut(() => LoginUseCase(AuthRepositoryImpl(AuthApiService())));
-    Get.lazyPut(() => LoginController());
+    Get.lazyPut(() => SignupController());
   }
 }

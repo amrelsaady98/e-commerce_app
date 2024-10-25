@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app/app/application/auth_manager/auth_manager.dart';
 import 'package:shop_app/app/domain/entities/login_request.dart';
 import 'package:shop_app/app/domain/entities/login_response.dart';
-import 'package:shop_app/app/domain/use_cases/auth_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/auth_use_cases/login_use_case.dart';
 import 'package:shop_app/core/base/data_state/data_state.dart';
 import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/services/internet_service/dio_exception.dart';
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
 
   final AuthManager _authmanager = Get.find<AuthManager>();
 
-  final AuthUseCase _authUseCase = Get.find<AuthUseCase>();
+  final LoginUseCase _authUseCase = Get.find<LoginUseCase>();
 
   @override
   void onInit() {
@@ -95,7 +95,7 @@ class LoginController extends GetxController {
     if (response is DataSuccess) {
       //save token locally and go to home
 
-      _authmanager.login(response.data?.user?.token ?? "");
+      _authmanager.login(response.data?.data?.access ?? "");
       Get.offAllNamed(Routes.MAIN_PAGE);
     } else {
       // add error to email textField

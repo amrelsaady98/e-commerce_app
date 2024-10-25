@@ -4,8 +4,8 @@ import 'package:shop_app/app/domain/repositories/auth_repository.dart';
 import 'package:shop_app/core/base/data_state/data_state.dart';
 import 'package:shop_app/core/base/usecases/usecase.dart';
 
-class AuthUseCase extends UseCase<DataState<LoginResponse>, LoginRequest> {
-  AuthUseCase(this._authRepository);
+class LoginUseCase extends UseCase<DataState<LoginResponse>, LoginRequest> {
+  LoginUseCase(this._authRepository);
 
   AuthRepository _authRepository;
 

@@ -1,3 +1,3 @@
 class ApiConstants {
-  static const baseUrl = "hhtps://baseurl.com";
+  static const baseUrl = "http://localhost:8000/";
 }

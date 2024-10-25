@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:rive/rive.dart';
 import 'package:shop_app/app/data/data_sources/remote/auth_api_service.dart';
 import 'package:shop_app/app/data/repositorites_impls/auth_repository_impl.dart';
-import 'package:shop_app/app/domain/use_cases/auth_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/auth_use_cases/login_use_case.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_controller.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';

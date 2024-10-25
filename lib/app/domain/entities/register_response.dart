@@ -1,19 +1,20 @@
 import 'package:shop_app/app/domain/entities/user.dart';
-class LoginResponse {
+
+class RegisterResponse {
   final String status;
   final String message;
   final DataModel? data;
   final dynamic errors;
 
-  LoginResponse({
+  RegisterResponse({
     required this.status,
     required this.message,
     this.data,
     this.errors,
   });
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) {
-    return LoginResponse(
+  factory RegisterResponse.fromJson(Map<String, dynamic> json) {
+    return RegisterResponse(
       status: json['status'],
       message: json['message'],
       data: json['data'] != null ? DataModel.fromJson(json['data']) : null,
@@ -58,4 +59,3 @@ class DataModel {
     };
   }
 }
-
