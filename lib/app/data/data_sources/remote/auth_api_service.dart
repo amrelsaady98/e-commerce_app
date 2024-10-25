@@ -91,7 +91,7 @@ class AuthApiService {
       {required RegisterRequest request}) async {
     try {
       final response = await _dioClient.post(
-        'auth/register/', // Adjust endpoint based on your API
+        'auth/register-customer/', // Adjust endpoint based on your API
         data: {
           'name': request.name,
           'email': request.email,

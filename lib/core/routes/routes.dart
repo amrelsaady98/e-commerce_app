@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shop_app/app/presentation/controllers/address/add_address_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/address/address_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
+import 'package:shop_app/app/presentation/controllers/authentication/signup_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/cart/cart_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/main/main_bindings.dart';
@@ -82,10 +83,9 @@ final List<GetPage> GET_PAGES = [
     binding: PaymentBindings(),
   ),
   GetPage(
-    name: Routes.ADD_PAYMENT_METHOD_PAGE,
-    page: () => const AddPaymentPage(),
-    binding: AddPaymentBindings()
-  ),
+      name: Routes.ADD_PAYMENT_METHOD_PAGE,
+      page: () => const AddPaymentPage(),
+      binding: AddPaymentBindings()),
   GetPage(
     name: Routes.SPLASH_PAGE,
     page: () => const SplashPage(),
@@ -103,5 +103,6 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.SIGNUP_PAGE,
     page: () => const SignupPgae(),
+    binding: SignupBindings(),
   ),
 ];

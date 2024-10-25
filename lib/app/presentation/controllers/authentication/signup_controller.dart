@@ -8,7 +8,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app/app/application/auth_manager/auth_manager.dart';
 import 'package:shop_app/app/domain/entities/login_request.dart';
 import 'package:shop_app/app/domain/entities/login_response.dart';
+import 'package:shop_app/app/domain/entities/register_request.dart';
+import 'package:shop_app/app/domain/entities/register_response.dart';
 import 'package:shop_app/app/domain/use_cases/auth_use_cases/login_use_case.dart';
+import 'package:shop_app/app/domain/use_cases/auth_use_cases/signup_use_case.dart';
 import 'package:shop_app/core/base/data_state/data_state.dart';
 import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/services/internet_service/dio_exception.dart';
@@ -19,7 +22,7 @@ class SignupController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  RxBool acceptTerms = false.obs;
+  RxBool acceptTerms = true.obs;
 
   RxnString nameError = RxnString(null);
   RxnString emailError = RxnString(null);
@@ -32,7 +35,7 @@ class SignupController extends GetxController {
 
   final AuthManager _authmanager = Get.find<AuthManager>();
 
-  final LoginUseCase _authUseCase = Get.find<LoginUseCase>();
+  final SignupUseCase _signupUseCase = Get.find<SignupUseCase>();
 
   @override
   void onInit() {
@@ -65,7 +68,7 @@ class SignupController extends GetxController {
   void validateEmail(String? val) {
     bool valid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(val ?? "");
+        .hasMatch(emailController.text);
     if (!valid) {
       emailError.value = "Invalid Email";
     } else {
@@ -87,7 +90,7 @@ class SignupController extends GetxController {
   }
 
   void validateConfirmPassword(String? val) {
-    if (val == passwordController.text) {
+    if (confirmPasswordController.text == passwordController.text) {
       confirmPasswordError.value = null;
     } else {
       confirmPasswordError.value = "Passwords do not match";
@@ -114,11 +117,11 @@ class SignupController extends GetxController {
     isLoginLoading.value = true;
 
     /// - fetch login
-    DataState<LoginResponse> response = await _authUseCase.call(
-      params: LoginRequest(
-        email: emailController.text,
-        password: passwordController.text,
-      ),
+    DataState<RegisterResponse> response = await _signupUseCase.call(
+      params: RegisterRequest(
+          name: nameController.text,
+          email: emailController.text,
+          password: passwordController.text),
     );
 
     // stop loading
@@ -167,5 +170,9 @@ class SignupController extends GetxController {
 
   void showPasswordPressed() {
     obscureTextPassword.value = !obscureTextPassword.value;
+  }
+
+  void showConfirmPasswordPressed() {
+    obscureTextConfirmPassword.value = !obscureTextConfirmPassword.value;
   }
 }

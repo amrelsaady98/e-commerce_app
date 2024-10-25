@@ -125,7 +125,11 @@ class LoginTextField extends StatelessWidget {
       controller: controller,
       textInputAction: inputAction,
       obscureText: obscureText ?? false,
-      onFieldSubmitted: onFieldSubmitted,
+      onFieldSubmitted: (val) {
+        if (onFieldSubmitted != null) {
+          onFieldSubmitted!(val);
+        }
+      },
       decoration: InputDecoration(
         labelText: lable,
         errorText: error,

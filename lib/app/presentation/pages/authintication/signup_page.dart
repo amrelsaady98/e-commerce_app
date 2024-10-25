@@ -1,20 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/app/presentation/controllers/authentication/signup_controller.dart';
 import 'package:shop_app/app/presentation/pages/authintication/login_widgets.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
 import 'package:shop_app/core/widgets/inputs.dart';
 
-class SignupPgae extends StatefulWidget {
+class SignupPgae extends GetView<SignupController> {
   const SignupPgae({super.key});
 
-  @override
-  State<SignupPgae> createState() => _SignupPgaeState();
-}
-
-class _SignupPgaeState extends State<SignupPgae> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,32 +58,64 @@ class _SignupPgaeState extends State<SignupPgae> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        LoginTextField(
-                          lable: "Name",
-                          inputAction: TextInputAction.next,
-                        ),
-                        SizedBox(height: 12),
-                        LoginTextField(
-                          lable: "Email",
-                          inputAction: TextInputAction.next,
-                        ),
-                        SizedBox(height: 12),
-                        LoginTextField(
-                          lable: "Password",
-                          inputAction: TextInputAction.next,
-                        ),
-                        SizedBox(height: 12),
-                        LoginTextField(
-                          lable: "Confirm Password",
-                        ),
-                        SizedBox(height: 48),
+                        Obx(() => LoginTextField(
+                              controller: controller.nameController,
+                              lable: "Name",
+                              error: controller.nameError.value,
+                              onFieldSubmitted: (val) =>
+                                  controller.validateName(val),
+                            )),
+                        const SizedBox(height: 12),
+                        Obx(() => LoginTextField(
+                              controller: controller.emailController,
+                              lable: "Email",
+                              error: controller.emailError.value,
+                              onFieldSubmitted: (val) =>
+                                  controller.validateEmail(val),
+                            )),
+                        const SizedBox(height: 12),
+                        Obx(() => LoginTextField(
+                              controller: controller.passwordController,
+                              lable: "Password",
+                              error: controller.passwordError.value,
+                              onFieldSubmitted: (val) =>
+                                  controller.validatePassword(val),
+                              obscureText: controller.obscureTextPassword.value,
+                              suffixIcon: GestureDetector(
+                                onTap: () => controller.showPasswordPressed(),
+                                child: Icon(controller.obscureTextPassword.value
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye),
+                              ),
+                            )),
+                        const SizedBox(height: 12),
+                        Obx(() => LoginTextField(
+                              controller: controller.confirmPasswordController,
+                              lable: "Confirm password",
+                              error: controller.confirmPasswordError.value,
+                              onFieldSubmitted: (val) =>
+                                  controller.validateConfirmPassword(val),
+                              obscureText:
+                                  controller.obscureTextConfirmPassword.value,
+                              suffixIcon: GestureDetector(
+                                onTap: () =>
+                                    controller.showConfirmPasswordPressed(),
+                                child: Icon(
+                                    controller.obscureTextConfirmPassword.value
+                                        ? Icons.remove_red_eye_outlined
+                                        : Icons.remove_red_eye),
+                              ),
+                            )),
+                        const SizedBox(height: 48),
                         Container(
                           width: double.infinity,
                           margin: const EdgeInsetsDirectional.only(end: 24),
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: ThinFilledTextButton(
                             text: "SIGN UP",
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.signupPressed();
+                            },
                           ),
                         ),
                         const SizedBox(height: 24),
