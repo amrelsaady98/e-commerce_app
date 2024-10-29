@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:shop_app/app/domain/entities/category.dart';
 
 import 'package:shop_app/app/domain/entities/product.dart';
+import 'package:shop_app/core/helpers/constants/api_constants.dart';
 import 'package:shop_app/core/routes/routes.dart';
 
 class ProductItem extends StatelessWidget {
@@ -34,8 +36,8 @@ class ProductItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Stack(
                 children: [
-                  Image.asset(
-                    item.thumbnailImage,
+                  Image.network(
+                    "${ApiConstants.BASE_URL}${item.thumbnailImage}",
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 200,
@@ -160,8 +162,8 @@ class CategoryItem extends StatelessWidget {
                   : Get.theme.colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: SvgPicture.asset(
-              item.iconAsset ?? "",
+            child: Image.network(
+              "${ApiConstants.BASE_URL}${item.iconURL}" ?? "",
               color: selected
                   ? Get.theme.colorScheme.onPrimary
                   : Get.theme.colorScheme.secondary,

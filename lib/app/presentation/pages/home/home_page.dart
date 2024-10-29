@@ -101,7 +101,7 @@ class HomePage extends GetView<HomeController> {
                           onItemPressed: (index) {
                             Get.toNamed(Routes.PRODUCT_DETAILS_PAGE,
                                 parameters: {
-                                  "id": controller.products[index].id
+                                  "id": controller.products[index].id.toString()
                                 });
                           },
                           onAddToCartPressed: controller.addToCartPressed,

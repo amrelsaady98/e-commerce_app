@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/app/domain/entities/login_request.dart';
 import 'package:shop_app/app/domain/entities/login_response.dart';
 import 'package:shop_app/app/domain/entities/register_request.dart';
@@ -71,6 +73,8 @@ class AuthApiService {
       }
     } on DioException catch (e) {
       // Handle Dio-specific exceptions (e.g., network errors, etc.)
+      e.printInfo();
+      e.printError();
       print("Error from AuthApiService: ${e}");
       return LoginResponse(
         status: 'error',
@@ -79,6 +83,11 @@ class AuthApiService {
       );
     } catch (e) {
       // Handle any other exceptions
+      e.printInfo();
+      e.printError();
+      if (kDebugMode) {
+        throw e;
+      }
       return LoginResponse(
         status: 'error',
         message: 'An unexpected error occurred: ${e.toString()}',
@@ -112,6 +121,8 @@ class AuthApiService {
       }
     } on DioException catch (e) {
       // Handling Dio-specific exceptions
+      e.printInfo();
+      e.printError();
       return RegisterResponse(
         status: 'error',
         message: e.response?.data['message'] ?? 'Server error occurred',
@@ -120,6 +131,9 @@ class AuthApiService {
       );
     } catch (e) {
       // Handling any other exceptions
+      e.printInfo();
+      e.printError();
+
       return RegisterResponse(
         status: 'error',
         message: 'An unexpected error occurred: ${e.toString()}',

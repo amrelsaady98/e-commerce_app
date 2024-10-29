@@ -14,10 +14,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
     var response = await _apiServices.fetchAllCategories();
 
     if (response.status.isOk) {
-      List<CategoryModel> categories =
-          (response.body?['categories'] as List<Map<String, dynamic>>)
-              .map<CategoryModel>((e) => CategoryModel.fromJson(e))
-              .toList();
+      List<CategoryModel> categories = (response.body?['data'] as List<dynamic>)
+          .map<CategoryModel>((e) => CategoryModel.fromJson(e))
+          .toList();
       return DataSuccess<List<CategoryModel>>(categories);
     } else {
       return DataField(

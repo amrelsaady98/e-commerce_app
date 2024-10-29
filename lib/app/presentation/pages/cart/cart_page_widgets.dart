@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/domain/entities/cart_item.dart';
+import 'package:shop_app/core/helpers/constants/api_constants.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
 
 class CartItemTile extends StatelessWidget {
@@ -28,8 +29,8 @@ class CartItemTile extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              '${cartItem.item.thumbnailImage}',
+            child: Image.network(
+              '${ApiConstants.BASE_URL}${cartItem.item.thumbnailImage}',
               width: 100,
               fit: BoxFit.cover,
             ),

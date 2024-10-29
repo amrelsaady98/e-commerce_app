@@ -8,7 +8,7 @@ class CategoryModel extends Category {
         id: json['id'] ?? "0",
         name: json['name'] ?? "",
         iconAsset: json['icon-asset'],
-        iconURL: json['icon-url'],
+        iconURL: json['icon_image'],
       );
 
   static const catigories = {

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:shop_app/app/domain/entities/product.dart';
 
 class ProductModel extends Product {
@@ -7,6 +9,7 @@ class ProductModel extends Product {
     required super.thumbnailImage,
     required super.mainPrice,
     required super.strokedPrice,
+    required super.salePrice,
     required super.hasDiscount,
     required super.discount,
     required super.rating,
@@ -14,24 +17,31 @@ class ProductModel extends Product {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        id: json['id'],
-        name: json['name'],
-        thumbnailImage: json['thumbnail-image'],
-        mainPrice: json['main-price'],
-        strokedPrice: json['stroked-price'],
-        hasDiscount: json['has-discount'],
-        discount: json['discount'],
-        rating: json['rating'],
-        sales: json['sales'],
+        id: json['product_id'].toString() ?? "0",
+        name: json['name'] ?? '',
+        thumbnailImage: json['image1'] ?? '',
+        mainPrice: json['our_price'] ?? '0.0',
+        strokedPrice: json['our_price'] ?? '0.0',
+        salePrice: json['sale_price'] ?? '0.0',
+        hasDiscount: json['has_discount'] ?? false,
+// TODO: calculate discount as (our_price - sale_price)
+        discount: json['our_price'] != null && json['sale_price'] != null
+            ? (int.tryParse(json['our_price']) ??
+                    0 - (int.tryParse(json['sale_price']) ?? 0))
+                .toInt()
+            : 0,
+        rating: json['rating'] ?? 0,
+        sales: json['sales'] ?? 0,
       );
 
-      Map<String, dynamic> toJson() => {
-        'id': id,
+  Map<String, dynamic> toJson() => {
+        'product_id': id.toString(),
         'name': name,
-        'thumbnail-image': thumbnailImage,
-        'main-price': mainPrice,
-        'stroked-price': strokedPrice,
-        'has-discount': hasDiscount,
+        'image1': thumbnailImage,
+        'our_price': mainPrice,
+        // 'stroked_price': strokedPrice,
+        'sale_price': salePrice,
+        'has_discount': hasDiscount,
         'discount': discount,
         'rating': rating,
         'sales': sales,
