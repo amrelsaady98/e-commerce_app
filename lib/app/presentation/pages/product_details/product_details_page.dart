@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/domain/entities/product.dart';
@@ -8,6 +9,7 @@ import 'package:shop_app/app/presentation/controllers/product_details/product_de
 import 'package:shop_app/core/helpers/constants/api_constants.dart';
 import 'package:shop_app/core/theme/colors.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
+import 'package:intl/intl.dart';
 
 class ProductDetailsPage extends GetView<ProductDetailsController> {
   const ProductDetailsPage({super.key});
@@ -28,40 +30,74 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                     children: [
                       Obx(
                         () => Container(
-                          margin: const EdgeInsets.only(left: 54),
+                          margin: controller.product.value == null
+                              ? EdgeInsets.only(left: 54)
+                              : null,
                           child: Hero(
                             tag: "product_image${Get.parameters['id']}",
                             child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(48)),
-                              child: controller.product.value == null
-                                  ? Image.network(
-                                      ApiConstants.BASE_URL +
-                                              (Get.arguments as Product)
-                                                  .thumbnailImage ??
-                                          "",
-                                      height: Get.height * 0.58,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.network(
-                                      "${ApiConstants.BASE_URL}${controller.product.value?.thumbnailImage}",
-                                      height: Get.height * 0.58,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
+                                borderRadius: controller.product.value == null
+                                    ? const BorderRadius.only(
+                                        bottomLeft: Radius.circular(48))
+                                    : BorderRadius.zero,
+                                child: controller.product.value == null
+                                    ? Image.network(
+                                        ApiConstants.BASE_URL +
+                                                (Get.arguments as Product)
+                                                    .thumbnailImage ??
+                                            "",
+                                        height: Get.height * 0.58,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Container(
+                                        height: Get.height * 0.58,
+                                        // margin: const EdgeInsets.only(left: 54),
+                                        child: ListView(
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          children: [
+                                            SizedBox(
+                                              width: 54,
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(48)),
+                                              child: Image.network(
+                                                "${ApiConstants.BASE_URL}${controller.product.value?.thumbnailImage}",
+                                                height: Get.height * 0.58,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            ...(controller.product.value
+                                                    ?.productImages
+                                                    .map((e) => Image.network(
+                                                          "${ApiConstants.BASE_URL}${e?.image}",
+                                                          height:
+                                                              Get.height * 0.58,
+                                                          fit: BoxFit.fitHeight,
+                                                        ))
+                                                    .toList() ??
+                                                []),
+                                          ],
+                                        ),
+                                      )),
                           ),
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Text(
-                          "Minimal Stand",
-                          style: GoogleFonts.gelasio(
-                              fontSize: 28, fontWeight: FontWeight.w500),
-                        ),
-                      ),
+                      Obx(() => Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: Text(
+                              "${controller.product.value?.name ?? ""}",
+                              style: GoogleFonts.gelasio(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          )),
                       const SizedBox(height: 12),
                       Obx(
                         () => Container(
@@ -83,17 +119,29 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                                         color: Get.theme.colorScheme
                                             .secondaryContainer,
                                         borderRadius: BorderRadius.circular(8)),
-                                    padding: const EdgeInsets.all(4),
-                                    child: const Icon(
-                                      Icons.add_rounded,
-                                      size: 24,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.add_rounded,
+                                          size: 24,
+                                        ),
+                                        ButtonInkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          onPressed: () =>
+                                              controller.increaseQuantity(),
+                                        )
+                                      ],
                                     ),
                                   ),
                                   Container(
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 18),
                                     child: Text(
-                                      "01",
+                                      NumberFormat("00")
+                                          .format(controller.quantity.value)
+                                          .toString(),
                                       style:
                                           GoogleFonts.nunitoSans(fontSize: 18),
                                     ),
@@ -102,13 +150,24 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                                     height: 36,
                                     width: 36,
                                     decoration: BoxDecoration(
-                                        color: Get.theme.colorScheme
-                                            .secondaryContainer,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    padding: const EdgeInsets.all(4),
-                                    child: const Icon(
-                                      Icons.remove_rounded,
-                                      size: 24,
+                                      color: Get
+                                          .theme.colorScheme.secondaryContainer,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.remove_rounded,
+                                          size: 24,
+                                        ),
+                                        ButtonInkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          onPressed: () =>
+                                              controller.decreaseQuantity(),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -186,65 +245,53 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                     ),
                   ),
                   Positioned(
-                    top: 150,
+                    top: 170,
                     left: 54 - 64 / 2,
-                    child: Container(
-                      width: 64,
-                      height: 72 * 3,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 8),
-                      decoration: BoxDecoration(
-                          color: Get.theme.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.2),
-                              blurRadius: 50,
-                              offset: Offset(2, 2),
-                              spreadRadius: 0,
-                            ),
-                          ]),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor:
-                                Get.theme.colorScheme.secondaryContainer,
-                            child: const Padding(
-                              padding: EdgeInsets.all(6.0),
+                    child: Obx(() => Container(
+                          width: 64,
+                          height: 64 *
+                              double.parse((controller.product.value != null
+                                      ? controller
+                                          .product.value!.productColors.length
+                                      : 0)
+                                  .toString()),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 8),
+                          decoration: BoxDecoration(
+                              color: Get.theme.colorScheme.surface,
+                              borderRadius: BorderRadius.circular(32),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromRGBO(0, 0, 0, 0.2),
+                                  blurRadius: 50,
+                                  offset: Offset(2, 2),
+                                  spreadRadius: 0,
+                                ),
+                              ]),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: controller.product.value != null
+                                  ? (controller.product.value!.productColors
+                                      .map((e) {
+                                      return CircleAvatar(
+                                        backgroundColor: Get.theme.colorScheme
+                                            .secondaryContainer,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(6.0),
 
-                              // ignore: prefer_const_constructors
-                              child: CircleAvatar(
-                                backgroundColor: Color(0xFFFFFFFF),
-                              ),
-                            ),
-                          ),
-                          CircleAvatar(
-                            backgroundColor:
-                                Get.theme.colorScheme.secondaryContainer,
-                            child: const Padding(
-                              padding: EdgeInsets.all(6.0),
-                              // ignore: prefer_const_constructors
-                              child: CircleAvatar(
-                                backgroundColor: Color(0xFFB4916C),
-                              ),
-                            ),
-                          ),
-                          CircleAvatar(
-                            backgroundColor:
-                                Get.theme.colorScheme.secondaryContainer,
-                            child: const Padding(
-                              padding: EdgeInsets.all(6.0),
-                              // ignore: prefer_const_constructors
-                              child: CircleAvatar(
-                                backgroundColor: Color(0xFFE4CBAD),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                                          // ignore: prefer_const_constructors
+                                          child: CircleAvatar(
+                                            backgroundColor: Color(int.parse(
+                                                    'FF${e.color.replaceAll('#', '')}',
+                                                    radix: 16) ??
+                                                0xFF000000),
+                                          ),
+                                        ),
+                                      );
+                                    }).toList())
+                                  : []),
+                        )),
                   ),
                 ],
               ),
@@ -281,7 +328,7 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                       Expanded(
                         flex: 4,
                         child: FilledButton(
-                          onPressed: () {},
+                          onPressed: () => controller.addToCart(),
                           style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll(
                               Get.theme.colorScheme.primary,

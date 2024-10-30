@@ -173,3 +173,32 @@ class ProductCounter extends StatelessWidget {
     );
   }
 }
+
+class ButtonInkWell extends StatelessWidget {
+  const ButtonInkWell({
+    super.key,
+    required this.onPressed,
+    this.borderRadius = BorderRadius.zero,
+  });
+  final BorderRadius borderRadius;
+  final void Function() onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          overlayColor: MaterialStatePropertyAll(
+            Get.theme.colorScheme.primary.withOpacity(0.5),
+          ),
+          onTap: () => onPressed(),
+          child: const SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+      ),
+    );
+  }
+}

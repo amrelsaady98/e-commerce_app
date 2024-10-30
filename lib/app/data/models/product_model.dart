@@ -15,10 +15,14 @@ class ProductModel extends Product {
     required super.discount,
     required super.totalRating,
     required super.sales,
+    required super.productImages,
+    required super.productColors,
   });
 
+
+
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        id: json['product_id'].toString() ?? "0",
+        id: json['product_id'].toString(),
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         thumbnailImage: json['image1'] ?? '',
@@ -26,29 +30,38 @@ class ProductModel extends Product {
         strokedPrice: json['our_price'] ?? '0.0',
         salePrice: json['sale_price'] ?? '0.0',
         hasDiscount: json['has_discount'] ?? false,
-// TODO: calculate discount as (our_price - sale_price)
         discount: json['our_price'] != null && json['sale_price'] != null
-            ? (int.tryParse(json['our_price']) ??
-                    0 - (int.tryParse(json['sale_price']) ?? 0))
+            ? ((double.tryParse(json['our_price']) ?? 0) -
+                    (double.tryParse(json['sale_price']) ?? 0))
                 .toInt()
             : 0,
-        totalRating:
-            double.tryParse(json['total_rating'].toString() ?? "0") ?? 0,
+        totalRating: double.tryParse(json['total_rating'].toString()) ?? 0.0,
         sales: json['sales'] ?? 0,
+        productImages: (json['product_images'] as List<dynamic>?)
+                ?.map((item) => ProductImage.fromJson(item))
+                .toList() ??
+            [],
+        productColors: (json['product_colors'] as List<dynamic>?)
+                ?.map((item) => ProductColor.fromJson(item))
+                .toList() ??
+            [],
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         'product_id': id.toString(),
         'name': name,
         'description': description,
         'image1': thumbnailImage,
         'our_price': mainPrice,
-        // 'stroked_price': strokedPrice,
+        'stroked_price': strokedPrice,
         'sale_price': salePrice,
         'has_discount': hasDiscount,
         'discount': discount,
         'total_rating': totalRating,
         'sales': sales,
+        'product_images': productImages.map((image) => image.toJson()).toList(),
+        'product_colors': productColors.map((color) => color.toJson()).toList(),
       };
 
   static const products = {
