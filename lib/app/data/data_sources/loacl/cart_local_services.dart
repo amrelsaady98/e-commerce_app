@@ -29,6 +29,7 @@ class CartLocalServices {
 
       await box.write(LocalStorageContants.CART_ITEMS_LIST_KEY, data);
     } catch (error) {
+      
       Get.printError(info: error.toString());
     }
   }

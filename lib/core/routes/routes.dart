@@ -10,6 +10,7 @@ import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/main/main_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/payment/add_payment_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/payment/payment_bindings.dart';
+import 'package:shop_app/app/presentation/controllers/product_details/product_details_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/splash/splash_bindings.dart';
 import 'package:shop_app/app/presentation/pages/authintication/login_page.dart';
 import 'package:shop_app/app/presentation/pages/authintication/signup_page.dart';
@@ -64,8 +65,9 @@ final List<GetPage> GET_PAGES = [
     binding: CartBindings(),
   ),
   GetPage(
-    name: Routes.PRODUCT_DETAILS_PAGE,
+    name: '${Routes.PRODUCT_DETAILS_PAGE}/:id',
     page: () => const ProductDetailsPage(),
+    binding: ProductDetailsBindings(),
   ),
   GetPage(
     name: Routes.SHIPPING_ADDRESSES_PAGE,

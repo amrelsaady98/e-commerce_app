@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,21 +47,31 @@ class ProductItem extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     end: 12,
                     bottom: 12,
-                    child: GestureDetector(
-                      onTap: () => onAddToCartPressed(index: index),
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                            color: Get.theme.colorScheme.secondary
-                                .withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: SvgPicture.asset(
-                            'assets/vectors/icon_add_to_cart.svg'),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          
+                          overlayColor: MaterialStatePropertyAll(
+                            Get.theme.colorScheme.primary,
+                          ),
+                          onTap: () => onAddToCartPressed(index: index),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: Get.theme.colorScheme.secondary
+                                  .withOpacity(0.5),
+                            ),
+                            child: SvgPicture.asset(
+                                'assets/vectors/icon_add_to_cart.svg'),
+                          ),
+                        ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -106,7 +117,7 @@ class ProductItemShimmer extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Container(
@@ -117,7 +128,7 @@ class ProductItemShimmer extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Container(

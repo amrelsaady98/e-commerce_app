@@ -6,19 +6,21 @@ class ProductModel extends Product {
   ProductModel({
     required super.id,
     required super.name,
+    required super.description,
     required super.thumbnailImage,
     required super.mainPrice,
     required super.strokedPrice,
     required super.salePrice,
     required super.hasDiscount,
     required super.discount,
-    required super.rating,
+    required super.totalRating,
     required super.sales,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json['product_id'].toString() ?? "0",
         name: json['name'] ?? '',
+        description: json['description'] ?? '',
         thumbnailImage: json['image1'] ?? '',
         mainPrice: json['our_price'] ?? '0.0',
         strokedPrice: json['our_price'] ?? '0.0',
@@ -30,20 +32,22 @@ class ProductModel extends Product {
                     0 - (int.tryParse(json['sale_price']) ?? 0))
                 .toInt()
             : 0,
-        rating: json['rating'] ?? 0,
+        totalRating:
+            double.tryParse(json['total_rating'].toString() ?? "0") ?? 0,
         sales: json['sales'] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
         'product_id': id.toString(),
         'name': name,
+        'description': description,
         'image1': thumbnailImage,
         'our_price': mainPrice,
         // 'stroked_price': strokedPrice,
         'sale_price': salePrice,
         'has_discount': hasDiscount,
         'discount': discount,
-        'rating': rating,
+        'total_rating': totalRating,
         'sales': sales,
       };
 

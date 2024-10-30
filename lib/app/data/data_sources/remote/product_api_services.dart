@@ -1,7 +1,8 @@
-import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
-import 'package:shop_app/app/data/models/product_model.dart';
-import 'package:shop_app/core/base/data_state/data_state.dart';
+
+
+
+import 'package:dio/dio.dart' as dio;
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shop_app/core/services/internet_service/dio_client.dart';
 
 class ProductApiServices {
@@ -75,6 +76,42 @@ class ProductApiServices {
         statusText:
             _response.data['status'] ?? _response.statusMessage ?? "Failed",
       );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<Response<dynamic>> fetchProductById(
+      String productId) async {
+    try {
+      final _response = await _dioClient.get(
+        'products/$productId',
+      );
+
+      if (_response.data['status'] == 'success') {
+        return Response(
+          body: _response.data,
+          statusCode: _response.statusCode,
+          statusText: _response.data['status'],
+        );
+      }
+      return Response(
+        body: null,
+        headers: null,
+        statusCode: _response.statusCode,
+        statusText:
+            _response.data['status'] ?? _response.statusMessage ?? "Failed",
+      );
+    }  on dio.DioException catch (e) {
+      final _response = e.response;
+      return  Response(
+        body: null,
+        headers: null,
+        statusCode: _response?.statusCode,
+        statusText:
+            _response?.data['status'] ?? _response?.statusMessage ?? "Failed",
+      );
+      throw e;
     } catch (e) {
       throw e;
     }

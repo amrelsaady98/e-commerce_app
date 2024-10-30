@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:shop_app/app/data/models/category_model.dart';
 import 'package:shop_app/core/services/internet_service/dio_client.dart';
 
 class CategoryApiServices {

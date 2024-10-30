@@ -79,5 +79,16 @@ class HomeController extends GetxController {
     Product selectedProduct = products[index];
     CartItem cartItem = CartItem(item: selectedProduct, count: 1);
     Get.find<CartManager>().addCartItem(cartItem);
+    Get.showSnackbar(
+      GetSnackBar(
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: Get.theme.colorScheme.primaryContainer,
+        messageText: Text(
+          'Item Added To Cart',
+          style: Get.textTheme.bodyLarge
+              ?.copyWith(color: Get.theme.colorScheme.primary),
+        ),
+      ),
+    );
   }
 }

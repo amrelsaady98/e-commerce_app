@@ -23,4 +23,21 @@ class ProductRepositoryImpl extends ProductRepository {
           GetHttpException(response.statusText ?? "Connection Failed"));
     }
   }
+
+  @override
+  Future<DataState<ProductModel>> fetchProductById(
+      {required String productId}) async {
+    try {
+      final _response = await _apiServices.fetchProductById(productId);
+      if (_response.status.isOk) {
+        return DataSuccess<ProductModel>(
+            ProductModel.fromJson(_response.body['data']));
+      } else {
+        return DataField(
+            GetHttpException(_response.statusText ?? "Connection Failed"));
+      }
+    } catch (e) {
+      return DataField(GetHttpException(e.toString()));
+    }
+  }
 }

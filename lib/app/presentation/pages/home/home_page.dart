@@ -60,6 +60,7 @@ class HomePage extends GetView<HomeController> {
                       vertical: 12,
                     ),
                     itemBuilder: (context, index) {
+                      // TODO: add all category item
                       return controller.isCategoryLoading.value
                           ? const CategoryItemShimmer()
                           : GestureDetector(
@@ -99,10 +100,11 @@ class HomePage extends GetView<HomeController> {
                           index: index,
                           item: controller.products[index],
                           onItemPressed: (index) {
-                            Get.toNamed(Routes.PRODUCT_DETAILS_PAGE,
-                                parameters: {
-                                  "id": controller.products[index].id.toString()
-                                });
+                            Get.toNamed(
+                              Routes.PRODUCT_DETAILS_PAGE +
+                                  "/${controller.products[index].id.toString()}",
+                              arguments: controller.products[index],
+                            );
                           },
                           onAddToCartPressed: controller.addToCartPressed,
                         );
