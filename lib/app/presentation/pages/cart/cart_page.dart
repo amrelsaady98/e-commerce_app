@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/domain/entities/cart_item.dart';
 import 'package:shop_app/app/presentation/controllers/cart/cart_controller.dart';
 import 'package:shop_app/app/presentation/pages/cart/cart_page_widgets.dart';
+import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
@@ -126,7 +127,7 @@ class CartPage extends GetView<CartController> {
                 Container(
                   width: double.infinity,
                   child: ThikFilledTextButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(Routes.CHECKOUT_PAGE),
                     text: "Check out",
                     backgroundColor: Get.theme.colorScheme.primary,
                     textColor: Get.theme.colorScheme.onPrimary,

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:shop_app/app/presentation/controllers/address/add_address_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/address/address_bindings.dart';
@@ -15,6 +16,7 @@ import 'package:shop_app/app/presentation/controllers/splash/splash_bindings.dar
 import 'package:shop_app/app/presentation/pages/authintication/login_page.dart';
 import 'package:shop_app/app/presentation/pages/authintication/signup_page.dart';
 import 'package:shop_app/app/presentation/pages/cart/cart_page.dart';
+import 'package:shop_app/app/presentation/pages/check_out/check_out_page.dart';
 import 'package:shop_app/app/presentation/pages/home/home_page.dart';
 import 'package:shop_app/app/presentation/pages/home/main_page.dart';
 import 'package:shop_app/app/presentation/pages/intro_page/intro_page.dart';
@@ -46,6 +48,7 @@ class Routes {
   static String TUTORAIL_INTRO = '/tutorial-intro';
 
   static String CART_PAGE = '/cart';
+  static String CHECKOUT_PAGE = '/checkout';
 }
 
 final List<GetPage> GET_PAGES = [
@@ -63,6 +66,10 @@ final List<GetPage> GET_PAGES = [
     name: Routes.CART_PAGE,
     page: () => const CartPage(),
     binding: CartBindings(),
+  ),
+  GetPage(
+    name: Routes.CHECKOUT_PAGE,
+    page: () => const CheckOutPage(),
   ),
   GetPage(
     name: '${Routes.PRODUCT_DETAILS_PAGE}/:id',
