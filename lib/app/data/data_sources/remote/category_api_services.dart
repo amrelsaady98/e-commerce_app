@@ -6,7 +6,7 @@ class CategoryApiServices {
 
   Future<Response<Map<String, dynamic>>> fetchAllCategories() async {
     final _response = await _dioClient.get(
-      'products/categories/all/',
+      '/products/categories/all/',
     );
     if (_response.statusCode == 200) {
       Map<String, dynamic> body = _response.data;

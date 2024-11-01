@@ -52,7 +52,6 @@ class ProductItem extends StatelessWidget {
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          
                           overlayColor: MaterialStatePropertyAll(
                             Get.theme.colorScheme.primary,
                           ),

@@ -30,7 +30,7 @@ class ProductApiServices {
   Future<Response<Map<String, dynamic>>> fetchAllProducts() async {
     try {
       final _response = await _dioClient.get(
-        'products/all',
+        '/products/all',
       );
       await Future.delayed(const Duration(seconds: 9));
 
@@ -85,7 +85,7 @@ class ProductApiServices {
       String productId) async {
     try {
       final _response = await _dioClient.get(
-        'products/$productId',
+        '/products/$productId',
       );
 
       if (_response.data['status'] == 'success') {

@@ -1,3 +1,4 @@
 class ApiConstants {
-  static const String BASE_URL = "http://192.168.1.6:8000/";
+  static const String BASE_URL =
+      "https://double-agata-amrelsaady-2b7e21c1.koyeb.app";
 }

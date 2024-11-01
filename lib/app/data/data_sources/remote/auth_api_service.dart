@@ -51,7 +51,7 @@ class AuthApiService {
   Future<LoginResponse> fetchLogin(LoginRequest request) async {
     try {
       final response = await _dioClient.post(
-        'auth/token/',
+        '/auth/token/',
         data: {
           'email': request.email,
           'password': request.password,
@@ -100,7 +100,7 @@ class AuthApiService {
       {required RegisterRequest request}) async {
     try {
       final response = await _dioClient.post(
-        'auth/register-customer/', // Adjust endpoint based on your API
+        '/auth/register-customer/', // Adjust endpoint based on your API
         data: {
           'name': request.name,
           'email': request.email,
