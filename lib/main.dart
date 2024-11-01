@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,5 +11,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   GetStorage.init();
-  runApp(const App());
+  runApp(DevicePreview(
+      enabled: true,
+      builder: (context) {
+        return const App();
+      }));
 }

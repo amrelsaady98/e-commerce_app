@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -33,10 +30,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,11 +44,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAIqlFlF1A2SsxdFalG2SG0-CasOpotxH8',
-    appId: '1:285445477987:android:e4928e45ffd523e6bb0a56',
-    messagingSenderId: '285445477987',
-    projectId: 'shop-app-2024',
-    storageBucket: 'shop-app-2024.appspot.com',
+    apiKey: 'AIzaSyCNTZswhuC-OJduomKdiMbIUXbXnSloyTQ',
+    appId: '1:581857654688:android:c6dcce7a6db39f36bb96c5',
+    messagingSenderId: '581857654688',
+    projectId: 'furnoture-shop',
+    storageBucket: 'furnoture-shop.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -65,4 +59,23 @@ class DefaultFirebaseOptions {
     storageBucket: 'shop-app-2024.appspot.com',
     iosBundleId: 'com.example.shopApp',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCqp6ZquQPcfc4rq2YQMrCFC_GLjNBAXW8',
+    appId: '1:581857654688:web:bae7e7e4ad559e35bb96c5',
+    messagingSenderId: '581857654688',
+    projectId: 'furnoture-shop',
+    authDomain: 'furnoture-shop.firebaseapp.com',
+    storageBucket: 'furnoture-shop.firebasestorage.app',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCqp6ZquQPcfc4rq2YQMrCFC_GLjNBAXW8',
+    appId: '1:581857654688:web:3eea35dac2f77cfabb96c5',
+    messagingSenderId: '581857654688',
+    projectId: 'furnoture-shop',
+    authDomain: 'furnoture-shop.firebaseapp.com',
+    storageBucket: 'furnoture-shop.firebasestorage.app',
+  );
+
 }

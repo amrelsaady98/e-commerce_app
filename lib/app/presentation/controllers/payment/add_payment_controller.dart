@@ -1,12 +1,9 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/app/domain/entities/payment_card.dart';
 import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/add_payment_card_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/get_local_payment_cards_use_case.dart';
-import 'package:shop_app/app/domain/use_cases/payment_card_use_cases/get_remote_payment_cards_list_use_case.dart';
 import 'package:shop_app/core/theme/colors.dart';
 
 class AddPaymentController extends GetxController

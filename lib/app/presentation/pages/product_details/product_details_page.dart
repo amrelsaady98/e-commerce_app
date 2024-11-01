@@ -305,23 +305,21 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Row(
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: FilledButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                              Get.theme.colorScheme.secondaryContainer,
-                            ),
-                            shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
+                      FilledButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Get.theme.colorScheme.secondaryContainer,
+                          ),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Container(
-                            height: (Get.width - 48 - 12) / 5,
-                          ),
+                        ),
+                        child: Container(
+                          height: (330 - 48 - 12) / 5,
+                          width: (330 - 48 - 12) / 5,
                         ),
                       ),
                       const SizedBox(width: 18),
@@ -340,8 +338,7 @@ class ProductDetailsPage extends GetView<ProductDetailsController> {
                             ),
                           ),
                           child: Container(
-                            height: (Get.width - 48 - 12) / 5,
-                            width: double.infinity,
+                            height: (330 - 48 - 12) / 5,
                             alignment: Alignment.center,
                             child: const Text(
                               "Add To Cart",

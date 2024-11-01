@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581857654688",
+    "project_id": "furnoture-shop",
+    "storage_bucket": "furnoture-shop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581857654688:android:c6dcce7a6db39f36bb96c5",
+        "android_client_info": {
+          "package_name": "com.shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNTZswhuC-OJduomKdiMbIUXbXnSloyTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
