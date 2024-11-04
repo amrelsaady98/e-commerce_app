@@ -125,4 +125,15 @@ class PaymentCardsRepositoryImpl extends PaymentCardsRepository {
       return DataField(Exception(error.toString()));
     }
   }
+
+  @override
+  Future<DataState<PaymentCard?>> fetchLocalDefaultPaymentCard() async {
+    return _localServices.getDefaultPaymentCard();
+  }
+
+  @override
+  Future<DataState<PaymentCard?>> fetchRemoteDefaultPaymentCard() {
+    // TODO: implement fetchRemoteDefaultPaymentCard
+    throw UnimplementedError();
+  }
 }

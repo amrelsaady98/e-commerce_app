@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/app/presentation/controllers/check_out/check_out_controller.dart';
 import 'package:shop_app/core/routes/routes.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 
-class CheckOutPage extends StatelessWidget {
+class CheckOutPage extends GetView<CheckOutController> {
   const CheckOutPage({super.key});
 
   @override
@@ -123,14 +124,31 @@ class CheckOutPage extends StatelessWidget {
                             color: Get.theme.colorScheme.secondary,
                           ),
                         ),
-                        const Icon(Icons.edit),
+                        SizedBox(
+                          width: 36,
+                          height: 36,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              const Icon(Icons.edit),
+                              ButtonInkWell(
+                                onPressed: () {
+                                  Get.toNamed(Routes.PAYMENT_CARDS_PAGE);
+                                },
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(
                       height: 12,
                     ),
-                    Container(
+                    Obx(
+                      () => Container(
                         padding: const EdgeInsets.all(12),
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Get.theme.colorScheme.primaryContainer,
@@ -143,32 +161,43 @@ class CheckOutPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Get.theme.colorScheme.primary,
-                                borderRadius: BorderRadius.circular(6),
+                        child: controller.selectedPaymentCard.value != null
+                            ? Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: Get.theme.colorScheme.primary,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Image.asset(
+                                      "assets/images/visa_logo.png",
+                                      height: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  Text(
+                                    "×××× ×××× ×××× ${controller.selectedPaymentCard.value?.cardNumber.substring((controller.selectedPaymentCard.value?.cardNumber.length ?? 19) - 4)}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Get.theme.colorScheme.primary,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(
+                                "Please, Add a Payment Card",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Get.theme.colorScheme.primary,
+                                ),
                               ),
-                              child: Image.asset(
-                                "assets/images/visa_logo.png",
-                                height: 24,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              "×××× ×××× ×××× 5322",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Get.theme.colorScheme.primary,
-                              ),
-                            ),
-                          ],
-                        ))
+                      ),
+                    ),
                   ],
                 ),
               ),

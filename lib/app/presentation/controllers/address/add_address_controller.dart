@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:shop_app/app/domain/entities/address.dart';
 import 'package:shop_app/app/domain/use_cases/address_use_cases/add_address_use_case.dart';
 import 'package:shop_app/app/domain/use_cases/address_use_cases/get_local_addresses_use_case.dart';
-import 'package:shop_app/core/constants/address_constants.dart';
+import 'package:shop_app/core/helpers/constants/address_constants.dart';
 import 'package:shop_app/core/theme/colors.dart';
 
 class AddAddressController extends GetxController {

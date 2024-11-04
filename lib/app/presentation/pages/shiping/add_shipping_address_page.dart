@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/app/domain/entities/address.dart';
 import 'package:shop_app/app/presentation/controllers/address/add_address_controller.dart';
 import 'package:shop_app/app/presentation/controllers/address/address_controller.dart';
-import 'package:shop_app/core/constants/address_constants.dart';
+import 'package:shop_app/core/helpers/constants/address_constants.dart';
 import 'package:shop_app/core/widgets/buttons.dart';
 import 'package:shop_app/core/widgets/custom_app_bar.dart';
 

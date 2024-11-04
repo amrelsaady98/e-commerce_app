@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/app/data/models/address_model.dart';
 import 'package:shop_app/app/domain/entities/address.dart';
-import 'package:shop_app/core/constants/local_storage_constants.dart';
+import 'package:shop_app/core/helpers/constants/local_storage_constants.dart';
 
 class AddressLocalServices {
   final box = GetStorage();

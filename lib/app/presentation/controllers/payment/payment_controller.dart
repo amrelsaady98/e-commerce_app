@@ -38,9 +38,11 @@ class PaymentController extends GetxController with WidgetsBindingObserver {
       // disable current default;
       final currentDefaultItemIndex =
           paymentCards.indexWhere((element) => element.isDefault == true);
-      PaymentCard currentDefaultItem = paymentCards[currentDefaultItemIndex];
-      currentDefaultItem.isDefault = false;
-      _updatePaymentCardUseCase.call(params: currentDefaultItem);
+      if (currentDefaultItemIndex >= 0) {
+        PaymentCard currentDefaultItem = paymentCards[currentDefaultItemIndex];
+        currentDefaultItem.isDefault = false;
+        _updatePaymentCardUseCase.call(params: currentDefaultItem);
+      }
       // make new default item;
       PaymentCard paymentCard = paymentCards[index];
       paymentCard.isDefault = value;

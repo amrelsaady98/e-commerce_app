@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/app/domain/entities/cart_item.dart';
-import 'package:shop_app/core/constants/local_storage_constants.dart';
+import 'package:shop_app/core/helpers/constants/local_storage_constants.dart';
 
 class CartLocalServices {
   final box = GetStorage();

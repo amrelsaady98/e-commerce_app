@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/app/data/models/payment_card_model.dart';
 import 'package:shop_app/core/base/data_state/data_state.dart';
-import 'package:shop_app/core/constants/local_storage_constants.dart';
+import 'package:shop_app/core/helpers/constants/local_storage_constants.dart';
 
 class PaymentCardsLocalServices {
   var box = GetStorage();
@@ -19,6 +19,25 @@ class PaymentCardsLocalServices {
         }
       }
       return DataSuccess(paymentCardModelList);
+    } catch (error) {
+      if (kDebugMode) {
+        print(error.toString());
+      }
+      return DataField(Exception(error.toString()));
+    }
+  }
+
+  DataState<PaymentCardModel?> getDefaultPaymentCard() {
+    try {
+      final paymentCards = getPaymentCardList();
+      if (paymentCards is DataSuccess && paymentCards.data != null) {
+        for (var element in paymentCards.data!) {
+          if (element.isDefault) {
+            return DataSuccess(element);
+          }
+        }
+      }
+      return DataSuccess(null);
     } catch (error) {
       if (kDebugMode) {
         print(error.toString());

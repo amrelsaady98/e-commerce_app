@@ -7,6 +7,7 @@ import 'package:shop_app/app/presentation/controllers/address/address_bindings.d
 import 'package:shop_app/app/presentation/controllers/authentication/login_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/authentication/signup_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/cart/cart_bindings.dart';
+import 'package:shop_app/app/presentation/controllers/check_out/check_out_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/home/home_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/main/main_bindings.dart';
 import 'package:shop_app/app/presentation/controllers/payment/add_payment_bindings.dart';
@@ -70,6 +71,7 @@ final List<GetPage> GET_PAGES = [
   GetPage(
     name: Routes.CHECKOUT_PAGE,
     page: () => const CheckOutPage(),
+    binding: CheckOutBindings(),
   ),
   GetPage(
     name: '${Routes.PRODUCT_DETAILS_PAGE}/:id',

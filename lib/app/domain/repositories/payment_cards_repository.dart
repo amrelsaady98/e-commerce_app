@@ -6,6 +6,10 @@ abstract class PaymentCardsRepository {
   Future<DataState<List<PaymentCard>>> getLocalPaymentCardList();
   // get remote card list
   Future<DataState<List<PaymentCard>>> fetchRemoteCardList();
+  // get remote default payment card
+  Future<DataState<PaymentCard?>> fetchRemoteDefaultPaymentCard();
+  // get local default payment card 
+  Future<DataState<PaymentCard?>> fetchLocalDefaultPaymentCard();
   // save local card list, returs [DataState] weather operation success or failed;
   Future<DataState> saveLocalCardList(List<PaymentCard> cardsList);
   // add card, returs [DataState] weather operation success or failed;
