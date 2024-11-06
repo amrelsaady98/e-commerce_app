@@ -18,6 +18,11 @@ This is a Flutter-based furniture e-commerce application designed to provide use
 - **Firebase**: For backend services including authentication and database storage.
 - **Provider**: State management solution for Flutter.
 
+## Overview
+
+![cover](assets/preview/cover.png)
+![screen shots](assets/preview/screen-1.png)
+
 ## Getting Started
 
 ### Prerequisites
