@@ -21,6 +21,7 @@ This is a Flutter-based furniture e-commerce application designed to provide use
 ## Overview
 
 ![cover](assets/preview/cover.png)
+![screen shots](assets/preview/screen-0.png)
 ![screen shots](assets/preview/screen-1.png)
 
 ## Getting Started
